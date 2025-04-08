@@ -1,0 +1,6 @@
+# ninja log v6
+3	102	7658240950164720	CMakeFiles/library_manager.dir/main.cpp.obj	17e4ab611d53e3dd
+8	79	7658241447475817	CMakeFiles/library_manager.dir/menu.cpp.obj	4c945b3074f3bf8e
+12	130	7658241447517805	CMakeFiles/library_manager.dir/sach.cpp.obj	aeb07095bf02bda8
+5	132	7658241447445405	CMakeFiles/library_manager.dir/docGia.cpp.obj	3e196df7c7d09250
+133	221	7658241448725971	library_manager.exe	40501043127e02fc
