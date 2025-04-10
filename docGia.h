@@ -5,6 +5,7 @@
 #define DOCGIA_H
 void menuDocGia();
 void quanLyDocGia();
+int tonTaiMaDocGia(char a[][9][50], int soDocGia, const char* ma);
 void nhapDanhSach(char a[][9][50], int* soDocGia);
 void xuatDanhSach(char a[][9][50], int soDocGia);
 const char* cacThuocTinh(int n);

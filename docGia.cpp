@@ -3,12 +3,10 @@
 #include "Header.h"
 #include <stdlib.h>
 #include "docGia.h"
+#define MAX_DOC_GIA 100
 //
 // Created by VICTUS on 4/8/2025.
 //
-
-
-
 void menuDocGia() {
     printf("\n================***================"); printf("\n");
     printf("BAN DANG THUC HIEN QUAN LY DOC GIA"); printf("\n");
@@ -30,10 +28,16 @@ void quanLyDocGia() {
     char chon;
     while (true) {
         menuDocGia();
-        scanf_s("%s", chon);
+        scanf
+        (" %c", &chon);
         switch (chon)
         {
-            case 'a': printf("|  Ban dang: Xem danh sach do gia trong thu vien  |");
+            case 'a':
+                if (soLuong < 1) {
+                printf("Danh sach trong!\n");
+                continue;
+            }
+            printf("|  Ban dang: Xem danh sach do gia trong thu vien  |");
             xuatDanhSach(danhSach, soLuong);
             break;
             case 'b': printf("|  Ban dang: Them doc gia  |");
@@ -65,12 +69,85 @@ void quanLyDocGia() {
             case 'g': printf("|  TRO LAI MENU  |");
 
             break;
-            default: printf("Khong co chuc nang nay! Hay thu chuc nang khac."); getchar(); getchar();
+            default:
+                printf("Lua chon khong hop le\n");
+            break;
         }
     }
 }
 
 void nhapDanhSach(char a[][9][50], int* soDocGia) {
+    int soLuongMoi;
+
+    while (1) {
+        printf("Nhap so luong doc gia moi: ");
+        if (scanf("%d", &soLuongMoi) == 1) {
+            if (*soDocGia + soLuongMoi > MAX_DOC_GIA) {
+                printf("[X] Tong so doc gia vuot qua gioi han (%d). Chi duoc them toi da %d nguoi nua.\n",
+                       MAX_DOC_GIA, MAX_DOC_GIA - *soDocGia);
+            } else {
+                break;
+            }
+        } else {
+            printf("Loi! Phai nhap so.\n");
+            while (getchar() != '\n');
+        }
+        printf("\n");
+    }
+    while (getchar() != '\n');
+
+    for (int i = *soDocGia; i < *soDocGia + soLuongMoi; i++) {
+        printf("\nNhap thong tin cho doc gia thu %d:\n", i + 1);
+        for (int j = 0; j < 9; j++) {
+            if (j == 7) { // Ngày lập thẻ
+                printf("%s (ddmmyyyy): ", cacThuocTinh(j));
+                char ngayNhap[9];
+                fgets(ngayNhap, 9, stdin);
+                while (getchar() != '\n');
+
+                char day[3], month[3], year[5];
+                strncpy(day, ngayNhap, 2); day[2] = '\0';
+                strncpy(month, ngayNhap + 2, 2); month[2] = '\0';
+                strncpy(year, ngayNhap + 4, 4); year[4] = '\0';
+
+                sprintf(a[i][j], "%s/%s/%s", day, month, year);
+
+                int d = atoi(day);
+                int m = atoi(month) + 48;
+                int y = atoi(year) + (m / 12);
+                m = m % 12;
+                if (m == 0) { m = 12; y--; }
+
+                sprintf(a[i][8], "%02d/%02d/%04d", d, m, y);
+
+            } else if (j == 8) {
+                continue;
+            } else {
+                if (j == 0) { // Mã độc giả
+                    while (1) {
+                        printf("%s: ", cacThuocTinh(j));
+                        fgets(a[i][j], 50, stdin);
+                        a[i][j][strcspn(a[i][j], "\n")] = 0;
+
+                        if (tonTaiMaDocGia(a, i, a[i][j])) {
+                            printf("[X] Ma doc gia da ton tai. Nhap lai!\n");
+                        } else {
+                            break;
+                        }
+                    }
+                } else {
+                    printf("%s: ", cacThuocTinh(j));
+                    fgets(a[i][j], 50, stdin);
+                    a[i][j][strcspn(a[i][j], "\n")] = 0;
+                }
+            }
+        }
+    }
+    *soDocGia += soLuongMoi;
+}
+
+
+/*void nhapDanhSach(char a[][9][50], int* soDocGia) {
     int soLuongMoi;
 
     while (1) {
@@ -121,6 +198,15 @@ void nhapDanhSach(char a[][9][50], int* soDocGia) {
         }
     }
     *soDocGia += soLuongMoi;
+}*/
+
+int tonTaiMaDocGia(char a[][9][50], int soDocGia, const char* ma) {
+    for (int i = 0; i < soDocGia; i++) {
+        if (strcmp(a[i][0], ma) == 0) {
+            return 1; // đã tồn tại
+        }
+    }
+    return 0; // chưa tồn tại
 }
 
 void xuatDanhSach(char a[][9][50], int soDocGia) {
@@ -161,7 +247,8 @@ void chinhSuaThongTin(char a[][9][50], int soDocGia, char s[]) {
 
             // Cộng thêm 48 tháng
             int d, m, y;
-            sscanf(ngayLap, "%d/%d/%d", &d, &m, &y);
+            sscanf(ngayLap, "%d/%d/%d", &d, &m, &y); // FIXED
+
             m += 48;
             y += (m - 1) / 12;
             m = (m - 1) % 12 + 1;

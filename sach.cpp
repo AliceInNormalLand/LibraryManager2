@@ -20,7 +20,7 @@ void menuSach() {
     printf("f.Tim kiem sach theo ho ten\n");
     printf("g.TRO LAI THU VIEN\n"); printf("\n");
     printf("================***================\n"); printf("\n");
-    printf("Chon mot chuc nang: ");
+    printf("\nChon mot chuc nang: ");
 }
 
 char quanLySach() {
@@ -30,7 +30,7 @@ char quanLySach() {
     char chon;
     while (true) {
         menuSach();
-        scanf_s("%s", chon);
+        scanf(" %c", &chon);
         switch (chon) {
             case 'a':
                 printf("DANH SACH SACH:\n");

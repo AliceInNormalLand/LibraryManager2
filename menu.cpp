@@ -17,5 +17,4 @@ void menu()
     printf("6.THOAT CHUONG TRINH\n"); printf("\n");
     printf("\n================***================"); printf("\n");
     printf("\nChon mot chuc nang: ");
-    printf("\n");
 }
