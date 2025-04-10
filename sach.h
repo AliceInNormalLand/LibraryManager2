@@ -6,6 +6,7 @@
 #define SACH_H
 void menuSach();
 const char* thuocTinhSach(int n);
+bool tonTaiMaSach(char ds[][8][50], int soSach, const char* maCanKiem);
 void nhapSach(char ds[][8][50], int* soSach);
 void xuatSach(char ds[][8][50], int soSach);
 void chinhSuaSach(char ds[][8][50], int soSach, char isbn[]);

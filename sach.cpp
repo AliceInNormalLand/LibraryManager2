@@ -10,7 +10,7 @@
 #include "sach.h"
 
 void menuSach() {
-    printf("================***================\n"); printf("\n");
+    printf("\n================***================\n"); printf("\n");
     printf("QUAN LY DOC SACH"); printf("\n");
     printf("a.Xem danh sach sach\n");
     printf("b.Them sach\n");
@@ -33,6 +33,10 @@ char quanLySach() {
         scanf(" %c", &chon);
         switch (chon) {
             case 'a':
+                if (soLuong < 1) {
+                    printf("Danh sach trong!\n");
+                    continue;
+                }
                 printf("DANH SACH SACH:\n");
             xuatSach(danhSach, soLuong);
             break;
@@ -85,7 +89,63 @@ const char* thuocTinhSach(int n) {
     return (n >= 0 && n < 8) ? tt[n] : "";
 }
 
+bool tonTaiMaSach(char ds[][8][50], int soSach, const char* maCanKiem) {
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ds[i][0], maCanKiem) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void nhapSach(char ds[][8][50], int* soSach) {
+    int soMoi;
+
+    while (1) {
+        printf("Nhap so luong sach muon them: ");
+        if (scanf("%d", &soMoi) == 1) break;
+        printf("Loi! Phai nhap so.\n");
+        while (getchar() != '\n');
+    }
+    while (getchar() != '\n');
+
+    if (*soSach + soMoi > MAX_SACH) {
+        printf("[X] Khong the them %d sach. Danh sach chi co the chua toi da %d sach.\n", soMoi, MAX_SACH);
+        return;
+    }
+
+    for (int i = *soSach; i < *soSach + soMoi; ) {
+        char maSachTam[50];
+
+        // Nhập mã sách
+        printf("Nhap thong tin cho sach thu %d:\n", i + 1);
+        while (1) {
+            printf("%s: ", thuocTinhSach(0));
+            fgets(maSachTam, 50, stdin);
+            maSachTam[strcspn(maSachTam, "\n")] = 0;
+
+            if (tonTaiMaSach(ds, *soSach, maSachTam)) {
+                printf("[X] Ma sach da ton tai. Vui long nhap ma khac.\n");
+            } else {
+                strcpy(ds[i][0], maSachTam);
+                break;
+            }
+        }
+
+        // Nhập các thuộc tính còn lại
+        for (int j = 1; j < 8; j++) {
+            printf("%s: ", thuocTinhSach(j));
+            fgets(ds[i][j], 50, stdin);
+            ds[i][j][strcspn(ds[i][j], "\n")] = 0;
+        }
+
+        i++; // Tăng chỉ số sách sau khi nhập thành công
+    }
+
+    *soSach += soMoi;
+}
+
+/*void nhapSach(char ds[][8][50], int* soSach) {
     int soMoi;
     printf("Nhap so luong sach muon them: ");
     scanf("%d", &soMoi);
@@ -100,7 +160,7 @@ void nhapSach(char ds[][8][50], int* soSach) {
         }
     }
     *soSach += soMoi;
-}
+}*/
 
 void xuatSach(char ds[][8][50], int soSach) {
     printf("\n%-15s | %-20s | %-15s | %-15s | %-10s | %-10s | %-10s | %-8s\n",
