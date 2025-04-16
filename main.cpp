@@ -5,6 +5,9 @@
 #include "menu.h"
 #include "docGia.h"
 #include "sach.h"
+#include "phieuMuonSach.h"
+
+
 
 
 int main()
@@ -23,7 +26,8 @@ int main()
             quanLySach();
             break;
             case 3: printf("|  LAP PHIEU MUON SACH  |");
-
+            nhapMuonSach();
+            xuatMuonSach();
             break;
             case 4: printf("|  LAP PHIEU TRA SACH  |");
 

@@ -7,4 +7,8 @@ set(CMAKE_CXX_STANDARD 20)
 file(GLOB SOURCES "*.cpp")
 
 # Tạo file thực thi từ các file nguồn
-add_executable(library_manager ${SOURCES})
+add_executable(library_manager ${SOURCES}
+        phieuMuonSach.cpp
+        phieuMuonSach.h
+        phieuTraSach.cpp
+        phieuTraSach.h)

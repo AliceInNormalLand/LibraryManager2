@@ -7,6 +7,8 @@
 //
 // Created by VICTUS on 4/8/2025.
 //
+char dsDocGia[MAX_DOC_GIA][9][50];  // Cấp phát bộ nhớ thật sự
+int soDocGia = 0;
 void menuDocGia() {
     printf("\n================***================"); printf("\n");
     printf("BAN DANG THUC HIEN QUAN LY DOC GIA"); printf("\n");
@@ -66,9 +68,9 @@ void quanLyDocGia() {
             s[strcspn(s, "\n")] = 0;
             timKiemTheoTen(danhSach, soLuong, s);
             break;
-            case 'g': printf("|  TRO LAI MENU  |");
-
-            break;
+            case 'g': printf("|  TRO LAI MENU  |\n");
+            return;
+            //break;
             default:
                 printf("Lua chon khong hop le\n");
             break;
@@ -145,60 +147,6 @@ void nhapDanhSach(char a[][9][50], int* soDocGia) {
     }
     *soDocGia += soLuongMoi;
 }
-
-
-/*void nhapDanhSach(char a[][9][50], int* soDocGia) {
-    int soLuongMoi;
-
-    while (1) {
-        printf("Nhap so luong doc gia moi: ");
-        if (scanf("%d", &soLuongMoi) == 1) break;
-        printf("Loi! Phai nhap so.\n");
-        while (getchar() != '\n');
-        printf("\n");
-    }
-    while (getchar() != '\n');
-
-    for (int i = *soDocGia; i < *soDocGia + soLuongMoi; i++) {
-        printf("\nNhap thong tin cho doc gia thu %d:\n", i + 1);
-        for (int j = 0; j < 9; j++) {
-            if (j == 7) { // Ngày lập thẻ
-                printf("%s (ddmmyyyy): ", cacThuocTinh(j));
-                char ngayNhap[9];
-                fgets(ngayNhap, 9, stdin);
-                while (getchar() != '\n'); // Xoá '\n' dư nếu có
-
-                // Tách thành dd/mm/yyyy
-                char day[3], month[3], year[5];
-                strncpy(day, ngayNhap, 2); day[2] = '\0';
-                strncpy(month, ngayNhap + 2, 2); month[2] = '\0';
-                strncpy(year, ngayNhap + 4, 4); year[4] = '\0';
-
-                sprintf(a[i][j], "%s/%s/%s", day, month, year);
-
-                // Tính ngày hết hạn
-                int d = atoi(day);
-                int m = atoi(month) + 48;
-                int y = atoi(year) + (m / 12);
-                m = m % 12;
-                if (m == 0) { m = 12; y--; }
-
-                sprintf(a[i][8], "%02d/%02d/%04d", d, m, y); // Cột 8 là ngày hết hạn
-
-            }
-            else if (j == 8) {
-                // Bỏ qua nhập "Ngày hết hạn"
-                continue;
-            }
-            else {
-                printf("%s: ", cacThuocTinh(j));
-                fgets(a[i][j], 50, stdin);
-                a[i][j][strcspn(a[i][j], "\n")] = 0;
-            }
-        }
-    }
-    *soDocGia += soLuongMoi;
-}*/
 
 int tonTaiMaDocGia(char a[][9][50], int soDocGia, const char* ma) {
     for (int i = 0; i < soDocGia; i++) {

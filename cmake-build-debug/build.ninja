@@ -67,6 +67,18 @@ build CMakeFiles/library_manager.dir/menu.cpp.obj: CXX_COMPILER__library_manager
   OBJECT_DIR = CMakeFiles\library_manager.dir
   OBJECT_FILE_DIR = CMakeFiles\library_manager.dir
 
+build CMakeFiles/library_manager.dir/phieuMuonSach.cpp.obj: CXX_COMPILER__library_manager_unscanned_Debug D$:/KHTN_NHAPMONLAPTRINH/DoAnNMLT/library_manager/phieuMuonSach.cpp || cmake_object_order_depends_target_library_manager
+  DEP_FILE = CMakeFiles\library_manager.dir\phieuMuonSach.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\library_manager.dir
+  OBJECT_FILE_DIR = CMakeFiles\library_manager.dir
+
+build CMakeFiles/library_manager.dir/phieuTraSach.cpp.obj: CXX_COMPILER__library_manager_unscanned_Debug D$:/KHTN_NHAPMONLAPTRINH/DoAnNMLT/library_manager/phieuTraSach.cpp || cmake_object_order_depends_target_library_manager
+  DEP_FILE = CMakeFiles\library_manager.dir\phieuTraSach.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\library_manager.dir
+  OBJECT_FILE_DIR = CMakeFiles\library_manager.dir
+
 build CMakeFiles/library_manager.dir/sach.cpp.obj: CXX_COMPILER__library_manager_unscanned_Debug D$:/KHTN_NHAPMONLAPTRINH/DoAnNMLT/library_manager/sach.cpp || cmake_object_order_depends_target_library_manager
   DEP_FILE = CMakeFiles\library_manager.dir\sach.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
@@ -81,7 +93,7 @@ build CMakeFiles/library_manager.dir/sach.cpp.obj: CXX_COMPILER__library_manager
 #############################################
 # Link the executable library_manager.exe
 
-build library_manager.exe: CXX_EXECUTABLE_LINKER__library_manager_Debug CMakeFiles/library_manager.dir/docGia.cpp.obj CMakeFiles/library_manager.dir/main.cpp.obj CMakeFiles/library_manager.dir/menu.cpp.obj CMakeFiles/library_manager.dir/sach.cpp.obj
+build library_manager.exe: CXX_EXECUTABLE_LINKER__library_manager_Debug CMakeFiles/library_manager.dir/docGia.cpp.obj CMakeFiles/library_manager.dir/main.cpp.obj CMakeFiles/library_manager.dir/menu.cpp.obj CMakeFiles/library_manager.dir/phieuMuonSach.cpp.obj CMakeFiles/library_manager.dir/phieuTraSach.cpp.obj CMakeFiles/library_manager.dir/sach.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\library_manager.dir

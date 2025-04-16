@@ -145,22 +145,6 @@ void nhapSach(char ds[][8][50], int* soSach) {
     *soSach += soMoi;
 }
 
-/*void nhapSach(char ds[][8][50], int* soSach) {
-    int soMoi;
-    printf("Nhap so luong sach muon them: ");
-    scanf("%d", &soMoi);
-    while (getchar() != '\n');
-
-    for (int i = *soSach; i < *soSach + soMoi; i++) {
-        printf("Nhap thong tin cho sach thu %d:\n", i + 1);
-        for (int j = 0; j < 8; j++) {
-            printf("%s: ", thuocTinhSach(j));
-            fgets(ds[i][j], 50, stdin);
-            ds[i][j][strcspn(ds[i][j], "\n")] = 0;
-        }
-    }
-    *soSach += soMoi;
-}*/
 
 void xuatSach(char ds[][8][50], int soSach) {
     printf("\n%-15s | %-20s | %-15s | %-15s | %-10s | %-10s | %-10s | %-8s\n",

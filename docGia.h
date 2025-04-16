@@ -3,6 +3,10 @@
 //
 #ifndef DOCGIA_H
 #define DOCGIA_H
+#define MAX_DOC_GIA 100
+#define MAX_STRING 50
+extern char dsDocGia[MAX_DOC_GIA][9][50];  // Khai báo mảng toàn cục
+extern int soDocGia;
 void menuDocGia();
 void quanLyDocGia();
 int tonTaiMaDocGia(char a[][9][50], int soDocGia, const char* ma);
