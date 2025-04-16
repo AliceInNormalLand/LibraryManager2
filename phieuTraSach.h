@@ -6,3 +6,6 @@
 #define PHIEUTRASACH_H
 
 #endif //PHIEUTRASACH_H
+int tonTaiMaDocGia3(char maDocGia[], char maISBN[]);
+void nhapTraSach();
+void xuatTraSach();

@@ -9,6 +9,8 @@
 #include "docGia.h"
 #include "sach.h"
 #define MAX_PHIEUMUON 100
+extern char dsPhieuMuon[100][4][50];
+extern int soPhieuMuon;
 #endif //PHIEUMUONSACH_H
 //int tonTaiMaDocGia(char a[][9][50], int soDocGia, const char* ma);
 int tonTaiMaDocGia2(char maDocGia[]);

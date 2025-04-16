@@ -6,6 +6,7 @@
 #include "docGia.h"
 #include "sach.h"
 #include "phieuMuonSach.h"
+#include "phieuTraSach.h"
 
 
 
@@ -30,7 +31,8 @@ int main()
             xuatMuonSach();
             break;
             case 4: printf("|  LAP PHIEU TRA SACH  |");
-
+            nhapTraSach();
+            xuatTraSach();
             break;
             case 5: printf("|  CAC THONG KE CO BAN  |");
 

@@ -9,10 +9,14 @@ extern char dsDocGia[MAX_DOC_GIA][9][50];  // Khai báo mảng toàn cục
 extern int soDocGia;
 void menuDocGia();
 void quanLyDocGia();
-int tonTaiMaDocGia(char a[][9][50], int soDocGia, const char* ma);
-void nhapDanhSach(char a[][9][50], int* soDocGia);
-void xuatDanhSach(char a[][9][50], int soDocGia);
-const char* cacThuocTinh(int n);
+const char* cacThuocTinh(int index);
+int tonTaiMaDocGia(char a[][9][50], int soLuong, const char* ma);
+//int tonTaiMaDocGia(char a[][9][50], int soDocGia, const char* ma);
+void nhapDanhSach();
+void xuatDanhSach();
+//void nhapDanhSach(char a[][9][50], int* soDocGia);
+//void xuatDanhSach(char a[][9][50], int soDocGia);
+//const char* cacThuocTinh(int n);
 void chinhSuaThongTin(char a[][9][50], int soDocGia, char s[]);
 void xoaDocGia(char a[][9][50], int* soDocGia, char s[]);
 void timKiemTheoCMND(char a[][9][50], int soDocGia, char s[]);
