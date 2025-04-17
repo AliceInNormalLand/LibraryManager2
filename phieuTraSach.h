@@ -7,5 +7,10 @@
 
 #endif //PHIEUTRASACH_H
 int tonTaiMaDocGia3(char maDocGia[], char maISBN[]);
+int tinhSoNgayTrongNam(int d, int m, int y);
+int tinhTongSoNgay(int d, int m, int y);
+int tinhTienPhat(char ngayMuon[], char ngayTraThucTe[]);
+void cong7Ngay(char ngayMuon[], char ngayTraDuKien[]);
 void nhapTraSach();
 void xuatTraSach();
+

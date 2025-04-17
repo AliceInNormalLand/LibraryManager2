@@ -41,7 +41,7 @@ void nhapMuonSach() {
 
     // Nhập số phiếu muốn thêm
     while (1) {
-        printf("Nhap so luong phieu muon them: ");
+        printf("\nNhap so luong phieu muon them: ");
         if (scanf("%d", &soPhieuMoi) == 1 && soPhieuMoi > 0) break;
         printf("Loi! Phai nhap so nguyen duong.\n");
         while (getchar() != '\n'); // Xóa buffer

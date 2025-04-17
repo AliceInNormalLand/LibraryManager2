@@ -99,7 +99,7 @@ void nhapDanhSach() {
     int soLuongMoi;
 
     while (1) {
-        printf("Nhap so luong doc gia moi: ");
+        printf("\nNhap so luong doc gia moi: ");
         if (scanf("%d", &soLuongMoi) == 1) {
             if (soDocGia + soLuongMoi > MAX_DOC_GIA) {
                 printf("[X] Tong so doc gia vuot qua gioi han (%d). Chi duoc them toi da %d nguoi nua.\n",
