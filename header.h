@@ -1,6 +1,13 @@
 #pragma once
 #define MAX_SACH 1000
 #define THUOC_TINH_SACH 6
+#include <stdlib.h>
+
+#include "menu.h"
+#include "docGia.h"
+#include "sach.h"
+#include "phieuMuonSach.h"
+#include "phieuTraSach.h"
 void clearScreen();
 void quanLyDocGia();
 char quanLyDocGia(char c);

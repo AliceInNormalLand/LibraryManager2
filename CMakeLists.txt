@@ -11,4 +11,8 @@ add_executable(library_manager ${SOURCES}
         phieuMuonSach.cpp
         phieuMuonSach.h
         phieuTraSach.cpp
-        phieuTraSach.h)
+        phieuTraSach.h
+        thongKe.cpp
+        hamExtra.cpp
+        hamExtra.h
+        thongKe.h)

@@ -1,13 +1,10 @@
 //
 // Created by VICTUS on 4/8/2025.
 //
-#define MAX_SACH 1000
-#define THUOC_TINH_SACH 6
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
 #include "sach.h"
+
+char dsSach[][8][50];  // Cấp phát bộ nhớ thật sự
+int soSach = 0;
 
 void menuSach() {
     printf("\n================***================\n"); printf("\n");
@@ -24,8 +21,6 @@ void menuSach() {
 }
 
 char quanLySach() {
-    static char danhSach[100][8][50];
-    static int soLuong = 0;
     char s[50];
     char chon;
     while (true) {
@@ -33,37 +28,37 @@ char quanLySach() {
         scanf(" %c", &chon);
         switch (chon) {
             case 'a':
-                if (soLuong < 1) {
+                if (soSach < 1) {
                     printf("Danh sach trong!\n");
                     continue;
                 }
                 printf("DANH SACH SACH:\n");
-            xuatSach(danhSach, soLuong);
+            xuatSach(dsSach, soSach);
             break;
             case 'b':
                 printf("THEM SACH MOI:\n");
-            nhapSach(danhSach, &soLuong);
+            nhapSach(dsSach, &soSach);
             break;
             case 'c':
                 printf("CHINH SUA THONG TIN SACH:\n");
             printf("Nhap ISBN can sua: ");
             scanf("%s", s);
             while (getchar() != '\n');
-            chinhSuaSach(danhSach, soLuong, s);
+            chinhSuaSach(dsSach, soSach, s);
             break;
             case 'd':
                 printf("XOA SACH:\n");
             printf("Nhap ISBN can xoa: ");
             scanf("%s", s);
             while (getchar() != '\n');
-            xoaSach(danhSach, &soLuong, s);
+            xoaSach(dsSach, &soSach, s);
             break;
             case 'e':
                 printf("TIM KIEM THEO ISBN:\n");
             printf("Nhap ISBN: ");
             scanf("%s", s);
             while (getchar() != '\n');
-            timSachTheoISBN(danhSach, soLuong, s);
+            timSachTheoISBN(dsSach, soSach, s);
             break;
             case 'f':
                 printf("TIM KIEM THEO TEN SACH:\n");
@@ -71,7 +66,7 @@ char quanLySach() {
             while (getchar() != '\n');
             fgets(s, 50, stdin);
             s[strcspn(s, "\n")] = 0;
-            timSachTheoTen(danhSach, soLuong, s);
+            timSachTheoTen(dsSach, soSach, s);
             break;
             default:
                 printf("Lua chon khong hop le\n");
@@ -86,19 +81,19 @@ const char* thuocTinhSach(int n) {
         "ISBN", "Ten sach", "Tac gia", "Nha xuat ban",
         "Nam xuat ban", "The loai", "Gia sach", "So luong"
     };
-    return (n >= 0 && n < 8) ? tt[n] : "";
+    return tt[n];
 }
 
-bool tonTaiMaSach(char ds[][8][50], int soSach, const char* maCanKiem) {
+bool tonTaiMaSach(char dsSach[][8][50], int soSach, const char* maCanKiem) {
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ds[i][0], maCanKiem) == 0) {
+        if (strcmp(dsSach[i][0], maCanKiem) == 0) {
             return true;
         }
     }
     return false;
 }
 
-void nhapSach(char ds[][8][50], int* soSach) {
+void nhapSach(char dsSach[][8][50], int* soSach) {
     int soMoi;
 
     while (1) {
@@ -124,10 +119,10 @@ void nhapSach(char ds[][8][50], int* soSach) {
             fgets(maSachTam, 50, stdin);
             maSachTam[strcspn(maSachTam, "\n")] = 0;
 
-            if (tonTaiMaSach(ds, *soSach, maSachTam)) {
+            if (tonTaiMaSach(dsSach, *soSach, maSachTam)) {
                 printf("[X] Ma sach da ton tai. Vui long nhap ma khac.\n");
             } else {
-                strcpy(ds[i][0], maSachTam);
+                strcpy(dsSach[i][0], maSachTam);
                 break;
             }
         }
@@ -135,8 +130,8 @@ void nhapSach(char ds[][8][50], int* soSach) {
         // Nhập các thuộc tính còn lại
         for (int j = 1; j < 8; j++) {
             printf("%s: ", thuocTinhSach(j));
-            fgets(ds[i][j], 50, stdin);
-            ds[i][j][strcspn(ds[i][j], "\n")] = 0;
+            fgets(dsSach[i][j], 50, stdin);
+            dsSach[i][j][strcspn(dsSach[i][j], "\n")] = 0;
         }
 
         i++; // Tăng chỉ số sách sau khi nhập thành công
@@ -145,27 +140,26 @@ void nhapSach(char ds[][8][50], int* soSach) {
     *soSach += soMoi;
 }
 
-
-void xuatSach(char ds[][8][50], int soSach) {
+void xuatSach(char dsSach[][8][50], int soSach) {
     printf("\n%-15s | %-20s | %-15s | %-15s | %-10s | %-10s | %-10s | %-8s\n",
         "ISBN", "Ten sach", "Tac gia", "Nha XB", "Nam XB", "The loai", "Gia", "So luong");
     printf("-------------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < soSach; i++) {
         printf("%-15s | %-20s | %-15s | %-15s | %-10s | %-10s | %-10s | %-8s\n",
-            ds[i][0], ds[i][1], ds[i][2], ds[i][3],
-            ds[i][4], ds[i][5], ds[i][6], ds[i][7]);
+            dsSach[i][0], dsSach[i][1], dsSach[i][2], dsSach[i][3],
+            dsSach[i][4], dsSach[i][5], dsSach[i][6], dsSach[i][7]);
     }
 }
 
-void chinhSuaSach(char ds[][8][50], int soSach, char isbn[]) {
+void chinhSuaSach(char dsSach[][8][50], int soSach, char isbn[]) {
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ds[i][0], isbn) == 0) {
+        if (strcmp(dsSach[i][0], isbn) == 0) {
             printf("Nhap thong tin moi cho sach (ISBN: %s):\n", isbn);
             for (int j = 0; j < 8; j++) {
-                printf("%s (Cu: %s): ", thuocTinhSach(j), ds[i][j]);
-                fgets(ds[i][j], 50, stdin);
-                ds[i][j][strcspn(ds[i][j], "\n")] = 0;
+                printf("%s (Cu: %s): ", thuocTinhSach(j), dsSach[i][j]);
+                fgets(dsSach[i][j], 50, stdin);
+                dsSach[i][j][strcspn(dsSach[i][j], "\n")] = 0;
             }
             printf("Cap nhat thanh cong!\n");
             return;
@@ -174,12 +168,12 @@ void chinhSuaSach(char ds[][8][50], int soSach, char isbn[]) {
     printf("Khong tim thay sach co ISBN: %s\n", isbn);
 }
 
-void xoaSach(char ds[][8][50], int* soSach, char isbn[]) {
+void xoaSach(char dsSach[][8][50], int* soSach, char isbn[]) {
     for (int i = 0; i < *soSach; i++) {
-        if (strcmp(ds[i][0], isbn) == 0) {
+        if (strcmp(dsSach[i][0], isbn) == 0) {
             for (int j = i; j < *soSach - 1; j++) {
                 for (int k = 0; k < 8; k++) {
-                    strcpy(ds[j][k], ds[j + 1][k]);
+                    strcpy(dsSach[j][k], dsSach[j + 1][k]);
                 }
             }
             (*soSach)--;
@@ -190,12 +184,12 @@ void xoaSach(char ds[][8][50], int* soSach, char isbn[]) {
     printf("Khong tim thay sach co ISBN: %s\n", isbn);
 }
 
-void timSachTheoISBN(char ds[][8][50], int soSach, char isbn[]) {
+void timSachTheoISBN(char dsSach[][8][50], int soSach, char isbn[]) {
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ds[i][0], isbn) == 0) {
+        if (strcmp(dsSach[i][0], isbn) == 0) {
             printf("Thong tin sach co ISBN %s:\n", isbn);
             for (int j = 0; j < 8; j++) {
-                printf("%s: %s\n", thuocTinhSach(j), ds[i][j]);
+                printf("%s: %s\n", thuocTinhSach(j), dsSach[i][j]);
             }
             return;
         }
@@ -203,14 +197,14 @@ void timSachTheoISBN(char ds[][8][50], int soSach, char isbn[]) {
     printf("Khong tim thay sach voi ISBN: %s\n", isbn);
 }
 
-void timSachTheoTen(char ds[][8][50], int soSach, char ten[]) {
+void timSachTheoTen(char dsSach[][8][50], int soSach, char ten[]) {
     int timThay = 0;
     for (int i = 0; i < soSach; i++) {
-        if (strstr(ds[i][1], ten)) {
+        if (strstr(dsSach[i][1], ten)) {
             timThay = 1;
             printf("\nSach co ten giong '%s':\n", ten);
             for (int j = 0; j < 8; j++) {
-                printf("%s: %s\n", thuocTinhSach(j), ds[i][j]);
+                printf("%s: %s\n", thuocTinhSach(j), dsSach[i][j]);
             }
         }
     }

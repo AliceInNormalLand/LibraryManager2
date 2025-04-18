@@ -30,15 +30,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="561b42d4-34bc-4060-83e3-d28faec1fd30" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/hamExtra.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hamExtra.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thongKe.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thongKe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-93490540294285542274.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-04-13T13-44-24-0116.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-library_manager-Debug-1581124cc243325a2c11.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/library_manager.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/library_manager.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docGia.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/docGia.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docGia.h" beforeDir="false" afterPath="$PROJECT_DIR$/docGia.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.h" beforeDir="false" afterPath="$PROJECT_DIR$/header.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phieuMuonSach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/phieuMuonSach.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phieuMuonSach.h" beforeDir="false" afterPath="$PROJECT_DIR$/phieuMuonSach.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phieuTraSach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/phieuTraSach.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phieuTraSach.h" beforeDir="false" afterPath="$PROJECT_DIR$/phieuTraSach.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/sach.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sach.h" beforeDir="false" afterPath="$PROJECT_DIR$/sach.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +102,11 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="library_manager" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="library_manager" TARGET_NAME="library_manager" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="library_manager" RUN_TARGET_NAME="library_manager">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -109,7 +129,7 @@
       <workItem from="1744699569815" duration="18105000" />
       <workItem from="1744773701922" duration="4173000" />
       <workItem from="1744782509114" duration="11965000" />
-      <workItem from="1744896449207" duration="4810000" />
+      <workItem from="1744896449207" duration="21471000" />
     </task>
     <servers />
   </component>
@@ -120,20 +140,5 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/phieuMuonSach.cpp</url>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/phieuTraSach.cpp</url>
-          <line>33</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

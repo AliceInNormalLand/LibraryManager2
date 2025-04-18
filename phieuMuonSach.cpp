@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "docGia.h"
+#include "phieuMuonSach.h"
 //#define MAX_DOCGIA 100
 #define MAX_SACH 100
 #define MAX_PHIEUMUON 100
@@ -10,8 +10,8 @@
 //char dsDocGia[MAX_DOCGIA][MAX_STRING] = {"DG01", "DG02", "DG03"};
 //int soDocGia = 3;
 
-char dsSach[MAX_SACH][MAX_STRING] = {"SACH01", "SACH02", "SACH03"};
-int soSach = 3;
+//char dsSach[MAX_SACH][MAX_STRING] = {"SACH01", "SACH02", "SACH03"};
+//int soSach = 3;
 
 // Danh sách phiếu mượn
 char dsPhieuMuon[100][4][50];
@@ -26,14 +26,12 @@ int tonTaiMaDocGia2(char maDocGia[]) {
 }
 
 // Hàm kiểm tra mã sách có tồn tại
-int tonTaiMaSach(char maSach[]) {
+int tonTaiMaSach2(char maSach[]) {
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(dsSach[i], maSach) == 0) return 1;
+        if (strcmp(dsSach[i][0], maSach) == 0) return 1;
     }
     return 0;
 }
-
-//bool tonTaiMaDocGia(char * a);
 
 // Hàm nhập phiếu mượn sách
 void nhapMuonSach() {
@@ -73,7 +71,7 @@ void nhapMuonSach() {
             printf("ISBN: ");
             fgets(dsPhieuMuon[i][1], MAX_STRING, stdin);
             dsPhieuMuon[i][1][strcspn(dsPhieuMuon[i][1], "\n")] = 0;
-            if (tonTaiMaSach(dsPhieuMuon[i][1])) {
+            if (tonTaiMaSach2(dsPhieuMuon[i][1])) {
                 break;
             }
             else {
@@ -86,10 +84,11 @@ void nhapMuonSach() {
         fgets(dsPhieuMuon[i][2], MAX_STRING, stdin);
         dsPhieuMuon[i][2][strcspn(dsPhieuMuon[i][2], "\n")] = 0;
 
+        // Tính ngày trả dự kiến
+        cong7Ngay(dsPhieuMuon[i][2], dsPhieuMuon[i][3]);
+
         // Nhập ngày trả dự kiến
-        printf("Ngay tra du kien: ");
-        fgets(dsPhieuMuon[i][3], MAX_STRING, stdin);
-        dsPhieuMuon[i][3][strcspn(dsPhieuMuon[i][3], "\n")] = 0;
+        printf("Ngay tra du kien: %s\n", dsPhieuMuon[i][3]);
     }
     soPhieuMuon += soPhieuMoi;
 }
