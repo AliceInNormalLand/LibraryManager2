@@ -55,11 +55,11 @@ void thongKeCoBan() {
 }
 
 int thongKeSachTV(char dsSach[][8][50], int soSach) {
-    int count = 0;
+    int tong = 0;
     for (int i = 0; i < soSach; i++) {
-        count++;
+        tong += dsSach[i][7];
     }
-    return soSach;
+    printf("Tong so sach trong thu vien la: %d", tong);
 }
 void thongKeLoaiSach(char dsSach[][8][50], int soSach) {
     for (int i = 0; i < soSach; i++) {
@@ -87,22 +87,68 @@ void thongKeLoaiSach(char dsSach[][8][50], int soSach) {
     }
 }
 
-int thongKeDocGia(char dsDocGia[][9][50], int soDocGia) {
-    int count = 0;
-    for (int i = 0; i < soDocGia; i++) {
-        count++;
+int thongKeDocGia(char dsPhieuMuon[][4][50], int soPhieuMuon, int soDocGia) {
+    printf("Tong so doc gia: %d", soDocGia);
+    for (int i = 0; i < soPhieuMuon; i++) {
+        int daTonTai = 0;
+        // Kiểm tra loại sách này đã xuất hiện trước đó chưa
+        for (int j = 0; j < i; j++) {
+            if (strcmp(dsPhieuMuon[i][0], dsPhieuMuon[j][0]) == 0) {
+                daTonTai = 1;
+                break;
+            }
+        }
+
+        if (!daTonTai) {
+            int dem = 0;
+            // Đếm số quyển thuộc loại sách này
+            for (int k = 0; k < soPhieuMuon; k++) {
+                if (strcmp(dsPhieuMuon[i][0], dsPhieuMuon[k][0]) == 0) {
+                    dem++;
+                }
+            }
+
+            printf("Doc gia co ma: %s - So luong da muon: %d\n", dsPhieuMuon[i][0], dem);
+        }
     }
-    return count;
 }
 
-int thongKeGioiTinh() {
+int thongKeGioiTinh(char dsDocGia[][9][50], int soDocGia) {
+    for (int i = 0; i < soDocGia; i++) {
+        int daTonTai = 0;
 
+        // Kiểm tra loại sách này đã xuất hiện trước đó chưa
+        for (int j = 0; j < i; j++) {
+            if (strcmp(dsDocGia[i][6], dsDocGia[j][6]) == 0) {
+                daTonTai = 1;
+                break;
+            }
+        }
+
+        if (!daTonTai) {
+            int dem = 0;
+            // Đếm số quyển thuộc loại sách này
+            for (int k = 0; k < soDocGia; k++) {
+                if (strcmp(dsDocGia[i][6], dsDocGia[k][6]) == 0) {
+                    dem++;
+                }
+            }
+
+            printf("Gioi tinh: %s - So luong: %d\n", dsDocGia[i][6], dem);
+        }
+    }
 }
 
-int thongKeSachMuon() {
-
+int thongKeSachMuon(int soPhieuMuon, int soPhieuTra) {
+    printf("So sach dang duoc muon la: %d", soPhieuMuon - soPhieuTra);
 }
 
-int thongKeTreHan() {
-
+int thongKeTreHan(char dsPhieuTra[][7][50], int soPhieuTra) {
+    int count = 0;
+    for (int i = 0; i < soPhieuTra; i++) {
+        if (dsPhieuTra[i][6] > 0) {
+            count++;
+        }
+    }
+    printf("So doc gia bi tre han la: %d", count);
 }

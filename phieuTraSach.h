@@ -8,6 +8,8 @@
 #include "phieuMuonSach.h"
 #include "hamExtra.h"
 #endif //PHIEUTRASACH_H
+extern char dsPhieuTra[100][7][50];
+extern int soPhieuTra;
 int tonTaiMaDocGia3(char maDocGia[], char maISBN[]);
 int tinhSoNgayTrongNam(int d, int m, int y);
 int tinhTongSoNgay(int d, int m, int y);

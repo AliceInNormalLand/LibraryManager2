@@ -8,6 +8,7 @@
 #include <string.h>
 
 #include "phieuMuonSach.h"
+#include "phieuTraSach.h"
 #include "sach.h"
 #include "docGia.h"
 #endif //THONGKE_H

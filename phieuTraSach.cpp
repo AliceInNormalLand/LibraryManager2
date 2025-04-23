@@ -10,7 +10,7 @@
 #define MAX_STRING 50
 
 // Danh sách phiếu mượn
-char dsPhieuTra[100][4][50];
+char dsPhieuTra[100][7][50];
 int soPhieuTra = 0;
 
 // Hàm kiểm tra mã độc giả có tồn tại
