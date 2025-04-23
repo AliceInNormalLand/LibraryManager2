@@ -34,16 +34,16 @@ void thongKeCoBan() {
             thongKeLoaiSach(dsSach, soSach);
             break;
             case 'c': printf("|  Ban dang: Thong ke so luong doc gia  |");
-            thongKeDocGia(dsDocGia, soDocGia);
+            thongKeDocGia(dsPhieuMuon, soPhieuMuon, soDocGia);
             break;
             case 'd': printf("|  Ban dang: Thong ke so luong doc gia theo gioi tinh  |");
-            thongKeGioiTinh();
+            thongKeGioiTinh(dsDocGia, soDocGia);
             break;
             case 'e': printf("|  Ban dang: Thong ke so sach dang duoc muon  |");
-            thongKeSachMuon();
+            thongKeSachMuon(soPhieuMuon, soPhieuTra);
             break;
             case 'f': printf("|  Ban dang: Thong ke danh sach doc gia bị tre han  |");
-            thongKeTreHan();
+            thongKeTreHan(dsPhieuTra, soPhieuTra);
             break;
             case 'g': printf("|  TRO LAI MENU  |\n");
             return;
@@ -61,6 +61,7 @@ int thongKeSachTV(char dsSach[][8][50], int soSach) {
     }
     printf("Tong so sach trong thu vien la: %d", tong);
 }
+
 void thongKeLoaiSach(char dsSach[][8][50], int soSach) {
     for (int i = 0; i < soSach; i++) {
         int daTonTai = 0;

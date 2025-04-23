@@ -31,9 +31,6 @@
   <component name="ChangeListManager">
     <list default="true" id="561b42d4-34bc-4060-83e3-d28faec1fd30" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phieuTraSach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/phieuTraSach.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phieuTraSach.h" beforeDir="false" afterPath="$PROJECT_DIR$/phieuTraSach.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thongKe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thongKe.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thongKe.h" beforeDir="false" afterPath="$PROJECT_DIR$/thongKe.h" afterDir="false" />
     </list>
@@ -108,7 +105,7 @@
       <workItem from="1744782509114" duration="11965000" />
       <workItem from="1744896449207" duration="24172000" />
       <workItem from="1744991997142" duration="63000" />
-      <workItem from="1745384603516" duration="7511000" />
+      <workItem from="1745384603516" duration="7878000" />
     </task>
     <servers />
   </component>

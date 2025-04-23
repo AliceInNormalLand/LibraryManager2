@@ -15,8 +15,8 @@
 void menuThongKe();
 int thongKeSachTV(char dsSach[][8][50], int soSach);
 void thongKeLoaiSach(char dsSach[][8][50], int soSach);
-int thongKeDocGia();
-int thongKeGioiTinh();
-int thongKeSachMuon();
-int thongKeTreHan();
+int thongKeDocGia(char dsPhieuMuon[][4][50], int soPhieuMuon, int soDocGia);
+int thongKeGioiTinh(char dsDocGia[][9][50], int soDocGia);
+int thongKeSachMuon(int soPhieuMuon, int soPhieuTra);
+int thongKeTreHan(char dsPhieuTra[][7][50], int soPhieuTra);
 void thongKeCoBan();
