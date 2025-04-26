@@ -24,11 +24,11 @@ int main()
             xuatTraSach();
             break;
             case 5: printf("|  CAC THONG KE CO BAN  |");
-
+            thongKeCoBan();
             break;
             case 6: printf("|  THOAT CHUONG TRINH  |");
-
-            break;
+            return 0;
+            //break;
             default: printf("Khong co chuc nang nay! Hay thu chuc nang khac."); break;
         }
     }

@@ -17,8 +17,102 @@
 char dsPhieuMuon[100][4][50];
 int soPhieuMuon = 0;
 
+int tonTaiMaDocGia2(char maDocGiaNhap[]) {
+    for (int i = 0; i < soDocGia; i++) {
+        if (strcmp(maDocGia[i], maDocGiaNhap) == 0) return 1;
+    }
+    return 0;
+}
+
+
+int tonTaiMaSach2(char maSachNhap[]) {
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ISBN[i], maSachNhap) == 0) return 1;
+    }
+    return 0;
+}
+
+
+
+//moi
+// Các mảng 1 chiều cần có:
+char maDocGiaPhieuMuon[MAX_PHIEUMUON][50];
+char isbnPhieuMuon[MAX_PHIEUMUON][50];
+char ngayMuon[MAX_PHIEUMUON][50];
+char ngayTraDuKien[MAX_PHIEUMUON][50];
+//int soPhieuMuon = 0;
+
+void nhapMuonSach() {
+    int soPhieuMoi;
+
+    // Nhập số phiếu muốn thêm
+    while (1) {
+        printf("\nNhap so luong phieu muon them: ");
+        if (scanf("%d", &soPhieuMoi) == 1 && soPhieuMoi > 0) break;
+        printf("Loi! Phai nhap so nguyen duong.\n");
+        while (getchar() != '\n'); // Xóa buffer
+    }
+    while (getchar() != '\n'); // Xóa ký tự thừa
+
+    if (soPhieuMuon + soPhieuMoi > MAX_PHIEUMUON) {
+        printf("[X] Khong the them %d phieu. Chi duoc them toi da %d phieu nua.\n", soPhieuMoi, MAX_PHIEUMUON - soPhieuMuon);
+        return;
+    }
+
+    for (int i = soPhieuMuon; i < soPhieuMuon + soPhieuMoi; i++) {
+        printf("\nNhap thong tin phieu muon thu %d:\n", i + 1);
+
+        // Nhập mã độc giả
+        while (1) {
+            printf("Ma doc gia: ");
+            fgets(maDocGiaPhieuMuon[i], sizeof(maDocGiaPhieuMuon[i]), stdin);
+            maDocGiaPhieuMuon[i][strcspn(maDocGiaPhieuMuon[i], "\n")] = '\0';
+            if (tonTaiMaDocGia2(maDocGiaPhieuMuon[i])) {
+                break;
+            } else {
+                printf("[X] Ma doc gia khong ton tai! Nhap lai.\n");
+            }
+        }
+
+        // Nhập ISBN
+        while (1) {
+            printf("ISBN: ");
+            fgets(isbnPhieuMuon[i], sizeof(isbnPhieuMuon[i]), stdin);
+            isbnPhieuMuon[i][strcspn(isbnPhieuMuon[i], "\n")] = '\0';
+            if (tonTaiMaSach2(isbnPhieuMuon[i])) {
+                break;
+            } else {
+                printf("[X] ISBN khong ton tai! Vui long nhap lai.\n");
+            }
+        }
+
+        // Nhập ngày mượn
+        printf("Ngay muon: ");
+        fgets(ngayMuon[i], sizeof(ngayMuon[i]), stdin);
+        ngayMuon[i][strcspn(ngayMuon[i], "\n")] = '\0';
+
+        // Tính ngày trả dự kiến
+        cong7Ngay(ngayMuon[i], ngayTraDuKien[i]);
+        printf("Ngay tra du kien: %s\n", ngayTraDuKien[i]);
+    }
+
+    soPhieuMuon += soPhieuMoi;
+}
+
+
+void xuatMuonSach() {
+    printf("\n%-15s | %-20s | %-15s | %-15s\n", "Ma doc gia", "ISBN", "Ngay muon", "Ngay tra du kien");
+    printf("--------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < soPhieuMuon; i++) {
+        printf("%-15s | %-20s | %-15s | %-15s\n",
+            maDocGiaPhieuMuon[i], isbnPhieuMuon[i], ngayMuon[i], ngayTraDuKien[i]);
+    }
+}
+
+
 // Hàm kiểm tra mã độc giả có tồn tại
-int tonTaiMaDocGia2(char maDocGia[]) {
+/*int tonTaiMaDocGia2(char maDocGia[]) {
     for (int i = 0; i < soDocGia; i++) {
         if (strcmp(dsDocGia[i][0], maDocGia) == 0) return 1;
     }
@@ -32,9 +126,10 @@ int tonTaiMaSach2(char maSach[]) {
     }
     return 0;
 }
+*/
 
 // Hàm nhập phiếu mượn sách
-void nhapMuonSach() {
+/*void nhapMuonSach() {
     int soPhieuMoi;
 
     // Nhập số phiếu muốn thêm
@@ -103,5 +198,5 @@ void xuatMuonSach() {
             dsPhieuMuon[i][0], dsPhieuMuon[i][1], dsPhieuMuon[i][2], dsPhieuMuon[i][3]);
     }
 }
-
+*/
 

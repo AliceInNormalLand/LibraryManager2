@@ -31,6 +31,24 @@
   <component name="ChangeListManager">
     <list default="true" id="561b42d4-34bc-4060-83e3-d28faec1fd30" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-04-18T09-40-27-0694.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/library_manager.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/library_manager.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docGia.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/docGia.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docGia.h" beforeDir="false" afterPath="$PROJECT_DIR$/docGia.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.h" beforeDir="false" afterPath="$PROJECT_DIR$/header.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/menu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu.h" beforeDir="false" afterPath="$PROJECT_DIR$/menu.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phieuMuonSach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/phieuMuonSach.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phieuMuonSach.h" beforeDir="false" afterPath="$PROJECT_DIR$/phieuMuonSach.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phieuTraSach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/phieuTraSach.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phieuTraSach.h" beforeDir="false" afterPath="$PROJECT_DIR$/phieuTraSach.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/sach.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sach.h" beforeDir="false" afterPath="$PROJECT_DIR$/sach.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thongKe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thongKe.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thongKe.h" beforeDir="false" afterPath="$PROJECT_DIR$/thongKe.h" afterDir="false" />
     </list>
@@ -45,6 +63,9 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -105,7 +126,10 @@
       <workItem from="1744782509114" duration="11965000" />
       <workItem from="1744896449207" duration="24172000" />
       <workItem from="1744991997142" duration="63000" />
-      <workItem from="1745384603516" duration="7878000" />
+      <workItem from="1745384603516" duration="7922000" />
+      <workItem from="1745645194740" duration="1285000" />
+      <workItem from="1745647960053" duration="66000" />
+      <workItem from="1745648041399" duration="25696000" />
     </task>
     <servers />
   </component>
@@ -116,5 +140,20 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/header.h</url>
+          <line>11</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

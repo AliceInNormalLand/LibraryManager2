@@ -1,7 +1,103 @@
-//
-// Created by VICTUS on 4/17/2025.
-//
 #include "thongKe.h"
+#include <string>
+
+
+int thongKeSachTV(char soLuongSach[][50], int soSach) {
+    int tong = 0;
+    for (int i = 0; i < soSach; i++) {
+        tong += atoi(soLuongSach[i]);
+    }
+    printf("Tong so sach trong thu vien la: %d\n", tong);
+    return tong;
+}
+
+void thongKeLoaiSach(char theLoai[][50], int soSach) {
+    for (int i = 0; i < soSach; i++) {
+        int daTonTai = 0;
+
+        for (int j = 0; j < i; j++) {
+            if (strcmp(theLoai[i], theLoai[j]) == 0) {
+                daTonTai = 1;
+                break;
+            }
+        }
+
+        if (!daTonTai) {
+            int dem = 0;
+            for (int k = 0; k < soSach; k++) {
+                if (strcmp(theLoai[i], theLoai[k]) == 0) {
+                    dem++;
+                }
+            }
+            printf("The loai: %s - So luong: %d\n", theLoai[i], dem);
+        }
+    }
+}
+
+void thongKeDocGia(char maDocGiaPhieuMuon[][50], int soPhieuMuon, int tongDocGia) {
+    printf("Tong so doc gia: %d\n", tongDocGia);
+
+    for (int i = 0; i < soPhieuMuon; i++) {
+        int daTonTai = 0;
+
+        for (int j = 0; j < i; j++) {
+            if (strcmp(maDocGiaPhieuMuon[i], maDocGiaPhieuMuon[j]) == 0) {
+                daTonTai = 1;
+                break;
+            }
+        }
+
+        if (!daTonTai) {
+            int dem = 0;
+            for (int k = 0; k < soPhieuMuon; k++) {
+                if (strcmp(maDocGiaPhieuMuon[i], maDocGiaPhieuMuon[k]) == 0) {
+                    dem++;
+                }
+            }
+            printf("Doc gia ma %s - So luot muon: %d\n", maDocGiaPhieuMuon[i], dem);
+        }
+    }
+}
+
+void thongKeGioiTinh(char gioiTinh[][10], int soDocGia) {
+    for (int i = 0; i < soDocGia; i++) {
+        int daTonTai = 0;
+
+        for (int j = 0; j < i; j++) {
+            if (strcmp(gioiTinh[i], gioiTinh[j]) == 0) {
+                daTonTai = 1;
+                break;
+            }
+        }
+
+        if (!daTonTai) {
+            int dem = 0;
+            for (int k = 0; k < soDocGia; k++) {
+                if (strcmp(gioiTinh[i], gioiTinh[k]) == 0) {
+                    dem++;
+                }
+            }
+            printf("Gioi tinh: %s - So luong: %d\n", gioiTinh[i], dem);
+        }
+    }
+}
+
+int thongKeSachMuon(int soPhieuMuon, int soPhieuTra) {
+    int dangMuon = soPhieuMuon - soPhieuTra;
+    printf("So sach dang duoc muon la: %d\n", dangMuon);
+    return dangMuon;
+}
+
+int thongKeTreHan(int tienPhatPhieuTra[], int soPhieuTra) {
+    int count = 0;
+    for (int i = 0; i < soPhieuTra; i++) {
+        if (tienPhatPhieuTra[i] > 0) {
+            count++;
+        }
+    }
+    printf("So doc gia bi tre han la: %d\n", count);
+    return count;
+}
 
 void menuThongKe() {
     printf("\n================***================"); printf("\n");
@@ -18,6 +114,57 @@ void menuThongKe() {
 }
 
 void thongKeCoBan() {
+    char chon;
+    while (true) {
+        menuThongKe();
+        printf("Nhap lua chon: ");
+        scanf(" %c", &chon);
+
+        switch (chon) {
+            case 'a':
+                printf("\n|  Ban dang: Thong ke tong so sach trong thu vien  |\n");
+            thongKeSachTV(soLuong, soSach);
+            break;
+
+            case 'b':
+                printf("\n|  Ban dang: Thong ke so luong sach theo the loai  |\n");
+            thongKeLoaiSach(theLoai, soSach);
+            break;
+
+            case 'c':
+                printf("\n|  Ban dang: Thong ke tong so doc gia va so luot muon  |\n");
+            thongKeDocGia(maDocGiaPhieuMuon, soPhieuMuon, soDocGia);
+            break;
+
+            case 'd':
+                printf("\n|  Ban dang: Thong ke so luong doc gia theo gioi tinh  |\n");
+            thongKeGioiTinh(gioiTinh, soDocGia);
+            break;
+
+            case 'e':
+                printf("\n|  Ban dang: Thong ke so sach dang duoc muon  |\n");
+            thongKeSachMuon(soPhieuMuon, soPhieuTra);
+            break;
+
+            case 'f':
+                printf("\n|  Ban dang: Thong ke so doc gia bi tre han  |\n");
+            thongKeTreHan(tienPhatPhieuTra, soPhieuTra);
+            break;
+
+            case 'g':
+                printf("\n|  TRO LAI MENU CHINH |\n");
+            return;
+
+            default:
+                printf("\nLua chon khong hop le. Vui long thu lai.\n");
+            break;
+        }
+        printf("\n"); // Thêm dòng trống giữa các thao tác cho đẹp
+    }
+}
+
+
+/*void thongKeCoBan() {
     char s[50]; // Sửa kiểu dữ liệu của s để lưu chuỗi
     char chon;
     while (true) {
@@ -57,9 +204,9 @@ void thongKeCoBan() {
 int thongKeSachTV(char dsSach[][8][50], int soSach) {
     int tong = 0;
     for (int i = 0; i < soSach; i++) {
-        tong += dsSach[i][7];
+        tong += atoi(dsSach[i][7]); // chuyển chuỗi sang số nguyên
     }
-    printf("Tong so sach trong thu vien la: %d", tong);
+    printf("Tong so sach trong thu vien la: %d\n", tong);
 }
 
 void thongKeLoaiSach(char dsSach[][8][50], int soSach) {
@@ -147,9 +294,10 @@ int thongKeSachMuon(int soPhieuMuon, int soPhieuTra) {
 int thongKeTreHan(char dsPhieuTra[][7][50], int soPhieuTra) {
     int count = 0;
     for (int i = 0; i < soPhieuTra; i++) {
-        if (dsPhieuTra[i][6] > 0) {
+        if (atoi(dsPhieuTra[i][6]) > 0) {
             count++;
         }
     }
     printf("So doc gia bi tre han la: %d", count);
 }
+*/

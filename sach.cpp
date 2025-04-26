@@ -3,9 +3,10 @@
 //
 #include "sach.h"
 
-char dsSach[][8][50];  // Cấp phát bộ nhớ thật sự
-int soSach = 0;
+/*char dsSach[][8][50];  // Cấp phát bộ nhớ thật sự
+int soSach = 0;*/
 
+/*
 void menuSach() {
     printf("\n================***================\n"); printf("\n");
     printf("QUAN LY DOC SACH"); printf("\n");
@@ -212,4 +213,327 @@ void timSachTheoTen(char dsSach[][8][50], int soSach, char ten[]) {
         printf("Khong tim thay sach co ten giong '%s'\n", ten);
     }
 }
+*/
 
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_SACH 100
+#define MAX_TEXT_LENGTH 50
+
+// Danh sách sách
+char ISBN[MAX_SACH][MAX_TEXT_LENGTH] = {
+    "9786042034673",
+    "9786042034680",
+    "9786042034697"
+};
+
+char tenSach[MAX_SACH][MAX_TEXT_LENGTH] = {
+    "Lap trinh C co ban",
+    "Lap trinh huong doi tuong",
+    "Cau truc du lieu"
+};
+
+char tacGia[MAX_SACH][MAX_TEXT_LENGTH] = {
+    "Nguyen Van A",
+    "Nguyen Van B",
+    "Nguyen Van C"
+};
+
+char nhaXuatBan[MAX_SACH][MAX_TEXT_LENGTH] = {
+    "NXB Giao Duc",
+    "NXB Tre",
+    "NXB Lao Dong"
+};
+
+char namXuatBan[MAX_SACH][MAX_TEXT_LENGTH] = {
+    "2022",
+    "2021",
+    "2023"
+};
+
+char theLoai[MAX_SACH][MAX_TEXT_LENGTH] = {
+    "Giao trinh",
+    "Giao trinh",
+    "Giao trinh"
+};
+
+char giaSach[MAX_SACH][MAX_TEXT_LENGTH] = {
+    "75000",
+    "85000",
+    "95000"
+};
+
+char soLuong[MAX_SACH][MAX_TEXT_LENGTH] = {
+    "10",
+    "8",
+    "5"
+};
+
+int soSach = 3; // Đang có 3 sách
+
+// Hàm hiển thị danh sách sách
+void xemDanhSachSach() {
+    printf("\n===== DANH SACH SACH =====\n");
+    for (int i = 0; i < soSach; i++) {
+        printf("Sach %d:\n", i + 1);
+        printf("ISBN: %s\n", ISBN[i]);
+        printf("Ten sach: %s\n", tenSach[i]);
+        printf("Tac gia: %s\n", tacGia[i]);
+        printf("Nha xuat ban: %s\n", nhaXuatBan[i]);
+        printf("Nam xuat ban: %s\n", namXuatBan[i]);
+        printf("The loai: %s\n", theLoai[i]);
+        printf("Gia sach: %s\n", giaSach[i]);
+        printf("So luong: %s\n\n", soLuong[i]);
+    }
+}
+
+// Hàm kiểm tra ISBN đã tồn tại chưa
+int tonTaiISBN(const char* isbn) {
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ISBN[i], isbn) == 0) return 1;
+    }
+    return 0;
+}
+
+// Hàm thêm sách
+void themSach() {
+    int soMoi;
+    printf("Nhap so luong sach muon them: ");
+    scanf("%d", &soMoi);
+    getchar(); // Xoa bo dem
+
+    if (soSach + soMoi > MAX_SACH) {
+        printf("Khong du bo nho de them!\n");
+        return;
+    }
+
+    for (int i = soSach; i < soSach + soMoi; ) {
+        char isbnTam[MAX_TEXT_LENGTH];
+
+        printf("Nhap ISBN sach thu %d: ", i + 1);
+        fgets(isbnTam, MAX_TEXT_LENGTH, stdin);
+        isbnTam[strcspn(isbnTam, "\n")] = 0;
+
+        if (tonTaiISBN(isbnTam)) {
+            printf("ISBN da ton tai! Vui long nhap lai.\n");
+            continue;
+        }
+        strcpy(ISBN[i], isbnTam);
+
+        printf("Nhap ten sach: ");
+        fgets(tenSach[i], MAX_TEXT_LENGTH, stdin);
+        tenSach[i][strcspn(tenSach[i], "\n")] = 0;
+
+        printf("Nhap tac gia: ");
+        fgets(tacGia[i], MAX_TEXT_LENGTH, stdin);
+        tacGia[i][strcspn(tacGia[i], "\n")] = 0;
+
+        printf("Nhap nha xuat ban: ");
+        fgets(nhaXuatBan[i], MAX_TEXT_LENGTH, stdin);
+        nhaXuatBan[i][strcspn(nhaXuatBan[i], "\n")] = 0;
+
+        printf("Nhap nam xuat ban: ");
+        fgets(namXuatBan[i], MAX_TEXT_LENGTH, stdin);
+        namXuatBan[i][strcspn(namXuatBan[i], "\n")] = 0;
+
+        printf("Nhap the loai: ");
+        fgets(theLoai[i], MAX_TEXT_LENGTH, stdin);
+        theLoai[i][strcspn(theLoai[i], "\n")] = 0;
+
+        printf("Nhap gia sach: ");
+        fgets(giaSach[i], MAX_TEXT_LENGTH, stdin);
+        giaSach[i][strcspn(giaSach[i], "\n")] = 0;
+
+        printf("Nhap so luong: ");
+        fgets(soLuong[i], MAX_TEXT_LENGTH, stdin);
+        soLuong[i][strcspn(soLuong[i], "\n")] = 0;
+
+        i++;
+    }
+
+    soSach += soMoi;
+    printf("Da them thanh cong %d sach!\n", soMoi);
+}
+
+// Hàm tìm sách theo ISBN
+void timKiemISBN() {
+    char isbn[MAX_TEXT_LENGTH];
+    printf("Nhap ISBN can tim: ");
+    fgets(isbn, MAX_TEXT_LENGTH, stdin);
+    isbn[strcspn(isbn, "\n")] = 0;
+
+    int found = 0;
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ISBN[i], isbn) == 0) {
+            printf("Tim thay sach:\n");
+            printf("Ten sach: %s\n", tenSach[i]);
+            printf("Tac gia: %s\n", tacGia[i]);
+            found = 1;
+            break;
+        }
+    }
+    if (!found) printf("Khong tim thay sach voi ISBN nay!\n");
+}
+
+// Hàm tìm sách theo tên
+void timKiemTen() {
+    char ten[MAX_TEXT_LENGTH];
+    printf("Nhap ten sach can tim: ");
+    fgets(ten, MAX_TEXT_LENGTH, stdin);
+    ten[strcspn(ten, "\n")] = 0;
+
+    int found = 0;
+    for (int i = 0; i < soSach; i++) {
+        if (strstr(tenSach[i], ten) != NULL) {
+            printf("Tim thay sach:\n");
+            printf("ISBN: %s\n", ISBN[i]);
+            printf("Tac gia: %s\n", tacGia[i]);
+            found = 1;
+        }
+    }
+    if (!found) printf("Khong tim thay sach voi tu khoa nay!\n");
+}
+
+// Hàm chỉnh sửa sách
+void chinhSuaSach() {
+    char isbn[MAX_TEXT_LENGTH];
+    printf("Nhap ISBN sach can sua: ");
+    fgets(isbn, MAX_TEXT_LENGTH, stdin);
+    isbn[strcspn(isbn, "\n")] = 0;
+
+    int found = 0;
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ISBN[i], isbn) == 0) {
+            printf("Nhap lai ten sach: ");
+            fgets(tenSach[i], MAX_TEXT_LENGTH, stdin);
+            tenSach[i][strcspn(tenSach[i], "\n")] = 0;
+
+            printf("Nhap lai tac gia: ");
+            fgets(tacGia[i], MAX_TEXT_LENGTH, stdin);
+            tacGia[i][strcspn(tacGia[i], "\n")] = 0;
+
+            printf("Nhap lai nha xuat ban: ");
+            fgets(nhaXuatBan[i], MAX_TEXT_LENGTH, stdin);
+            nhaXuatBan[i][strcspn(nhaXuatBan[i], "\n")] = 0;
+
+            printf("Nhap lai nam xuat ban: ");
+            fgets(namXuatBan[i], MAX_TEXT_LENGTH, stdin);
+            namXuatBan[i][strcspn(namXuatBan[i], "\n")] = 0;
+
+            printf("Nhap lai the loai: ");
+            fgets(theLoai[i], MAX_TEXT_LENGTH, stdin);
+            theLoai[i][strcspn(theLoai[i], "\n")] = 0;
+
+            printf("Nhap lai gia sach: ");
+            fgets(giaSach[i], MAX_TEXT_LENGTH, stdin);
+            giaSach[i][strcspn(giaSach[i], "\n")] = 0;
+
+            printf("Nhap lai so luong: ");
+            fgets(soLuong[i], MAX_TEXT_LENGTH, stdin);
+            soLuong[i][strcspn(soLuong[i], "\n")] = 0;
+
+            printf("Sua thanh cong!\n");
+            found = 1;
+            break;
+        }
+    }
+    if (!found) printf("Khong tim thay sach!\n");
+}
+
+// Hàm xóa sách
+void xoaSach() {
+    char isbn[MAX_TEXT_LENGTH];
+    printf("Nhap ISBN sach can xoa: ");
+    fgets(isbn, MAX_TEXT_LENGTH, stdin);
+    isbn[strcspn(isbn, "\n")] = 0;
+
+    int found = 0;
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ISBN[i], isbn) == 0) {
+            for (int j = i; j < soSach - 1; j++) {
+                strcpy(ISBN[j], ISBN[j + 1]);
+                strcpy(tenSach[j], tenSach[j + 1]);
+                strcpy(tacGia[j], tacGia[j + 1]);
+                strcpy(nhaXuatBan[j], nhaXuatBan[j + 1]);
+                strcpy(namXuatBan[j], namXuatBan[j + 1]);
+                strcpy(theLoai[j], theLoai[j + 1]);
+                strcpy(giaSach[j], giaSach[j + 1]);
+                strcpy(soLuong[j], soLuong[j + 1]);
+            }
+            soSach--;
+            printf("Xoa sach thanh cong!\n");
+            found = 1;
+            break;
+        }
+    }
+    if (!found) printf("Khong tim thay sach!\n");
+}
+
+void menuSach() {
+    printf("\n================***================\n"); printf("\n");
+    printf("QUAN LY DOC SACH"); printf("\n");
+    printf("a.Xem danh sach sach\n");
+    printf("b.Them sach\n");
+    printf("c.Chinh sua thong tin sach\n");
+    printf("d.Xoa sach\n");
+    printf("e.Tim kiem sach theo ISBN\n");
+    printf("f.Tim kiem sach theo ho ten\n");
+    printf("g.TRO LAI THU VIEN\n"); printf("\n");
+    printf("================***================\n"); printf("\n");
+    printf("\nChon mot chuc nang: ");
+}
+
+char quanLySach() {
+    char chon;
+    while (true) {
+        menuSach();
+        scanf(" %c", &chon);
+        switch (chon) {
+            case 'a':
+                if (soSach < 1) {
+                    printf("Danh sach trong!\n");
+                    continue;
+                }
+                printf("DANH SACH SACH:\n");
+            xemDanhSachSach();
+            break;
+            case 'b':
+                printf("THEM SACH MOI:\n");
+            themSach();
+            break;
+            case 'c':
+                printf("CHINH SUA THONG TIN SACH:\n");
+            chinhSuaSach();
+            break;
+            case 'd':
+                printf("XOA SACH:\n");
+            xoaSach();
+            break;
+            case 'e':
+                printf("TIM KIEM THEO ISBN:\n");
+            timKiemISBN();
+            break;
+            case 'f':
+                printf("TIM KIEM THEO TEN SACH:\n");
+            timKiemTen();
+            break;
+            default:
+                printf("Lua chon khong hop le\n");
+            break;
+        }
+    }
+    return chon;
+}
+//LOI O DAY NHA************************
+void capNhatSoLuong(char maSachTV[]) {
+    for (int i = 0; i < soSach; i++) {
+        int soLuongSach = atoi(soLuong[i]);
+        if (strcmp(ISBN[i], maSachTV) == 0) {
+            soLuongSach -= 1;
+            char chuoi[50];
+            //soLuong[i] = itoa(soLuongSach, chuoi, 10);
+        }
+    }
+}
