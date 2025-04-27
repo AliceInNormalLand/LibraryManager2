@@ -360,6 +360,7 @@ void themSach() {
 // Hàm tìm sách theo ISBN
 void timKiemISBN() {
     char isbn[MAX_TEXT_LENGTH];
+    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
     printf("Nhap ISBN can tim: ");
     fgets(isbn, MAX_TEXT_LENGTH, stdin);
     isbn[strcspn(isbn, "\n")] = 0;
@@ -380,13 +381,14 @@ void timKiemISBN() {
 // Hàm tìm sách theo tên
 void timKiemTen() {
     char ten[MAX_TEXT_LENGTH];
+    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
     printf("Nhap ten sach can tim: ");
     fgets(ten, MAX_TEXT_LENGTH, stdin);
     ten[strcspn(ten, "\n")] = 0;
 
     int found = 0;
     for (int i = 0; i < soSach; i++) {
-        if (strstr(tenSach[i], ten) != NULL) {
+        if (strcmp(tenSach[i], ten) == 0) {
             printf("Tim thay sach:\n");
             printf("ISBN: %s\n", ISBN[i]);
             printf("Tac gia: %s\n", tacGia[i]);
@@ -399,6 +401,7 @@ void timKiemTen() {
 // Hàm chỉnh sửa sách
 void chinhSuaSach() {
     char isbn[MAX_TEXT_LENGTH];
+    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
     printf("Nhap ISBN sach can sua: ");
     fgets(isbn, MAX_TEXT_LENGTH, stdin);
     isbn[strcspn(isbn, "\n")] = 0;
@@ -445,6 +448,7 @@ void chinhSuaSach() {
 // Hàm xóa sách
 void xoaSach() {
     char isbn[MAX_TEXT_LENGTH];
+    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
     printf("Nhap ISBN sach can xoa: ");
     fgets(isbn, MAX_TEXT_LENGTH, stdin);
     isbn[strcspn(isbn, "\n")] = 0;
@@ -519,21 +523,26 @@ char quanLySach() {
                 printf("TIM KIEM THEO TEN SACH:\n");
             timKiemTen();
             break;
+            case 'g':
+                printf("TIM KIEM THEO TEN SACH:\n");
+            return 0;
             default:
-                printf("Lua chon khong hop le\n");
+                printf("Tro lai thu vien\n");
             break;
         }
     }
     return chon;
 }
+
 //LOI O DAY NHA************************
-void capNhatSoLuong(char maSachTV[]) {
+void capNhatSauMuon(char maSachTV[]) {
     for (int i = 0; i < soSach; i++) {
-        int soLuongSach = atoi(soLuong[i]);
         if (strcmp(ISBN[i], maSachTV) == 0) {
+            int soLuongSach = atoi(soLuong[i]);
             soLuongSach -= 1;
-            char chuoi[50];
-            //soLuong[i] = itoa(soLuongSach, chuoi, 10);
+            sprintf(soLuong[i], "%d", soLuongSach); // chuyển thẳng số thành chuỗi
         }
     }
 }
+
+

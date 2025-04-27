@@ -94,6 +94,8 @@ void nhapMuonSach() {
         // Tính ngày trả dự kiến
         cong7Ngay(ngayMuon[i], ngayTraDuKien[i]);
         printf("Ngay tra du kien: %s\n", ngayTraDuKien[i]);
+
+        capNhatSauMuon(isbnPhieuMuon[i]);
     }
 
     soPhieuMuon += soPhieuMoi;

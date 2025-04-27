@@ -33,6 +33,7 @@ extern char namXuatBan[MAX_SACH][MAX_TEXT_LENGTH];
 extern char theLoai[MAX_SACH][MAX_TEXT_LENGTH];
 extern char giaSach[MAX_SACH][MAX_TEXT_LENGTH];
 extern char soLuong[MAX_SACH][MAX_TEXT_LENGTH];
+extern void capNhatSauMuon(char maSachTV[]);
 void xemDanhSachSach();
 
 // Hàm kiểm tra ISBN đã tồn tại chưa
@@ -56,3 +57,4 @@ void xoaSach();
 void menuSach();
 
 char quanLySach();
+

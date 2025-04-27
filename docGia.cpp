@@ -417,7 +417,7 @@ void suaThongTinDocGia() {
 void xoaThongTinDocGia() {
     char id[MAX_DOC_GIA_ID_LENGTH];
     int found = 0;
-
+    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
     printf("Nhap ma doc gia can xoa: ");
     fgets(id, MAX_DOC_GIA_ID_LENGTH, stdin);
     id[strcspn(id, "\n")] = 0;
@@ -451,7 +451,7 @@ void xoaThongTinDocGia() {
 void timKiemDocGiaTheoCMND() {
     char cmndToSearch[MAX_TEXT_LENGTH];
     int found = 0;
-
+    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
     printf("Nhap CMND doc gia can tim: ");
     fgets(cmndToSearch, MAX_TEXT_LENGTH, stdin);
     cmndToSearch[strcspn(cmndToSearch, "\n")] = 0;
@@ -481,7 +481,7 @@ void timKiemDocGiaTheoCMND() {
 void timKiemDocGiaTheoHoTen() {
     char hoTenToSearch[MAX_TEXT_LENGTH];
     int found = 0;
-
+    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
     printf("Nhap ho ten doc gia can tim: ");
     fgets(hoTenToSearch, MAX_TEXT_LENGTH, stdin);
     hoTenToSearch[strcspn(hoTenToSearch, "\n")] = 0;
