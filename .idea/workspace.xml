@@ -36,7 +36,6 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/docGia.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/docGia.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/hamExtra.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/hamExtra.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/menu.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/menu.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/phieuMuonSach.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/phieuMuonSach.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/phieuTraSach.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/phieuTraSach.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/sach.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/library_manager.dir/sach.cpp.obj" afterDir="false" />
@@ -47,9 +46,7 @@
       <change beforePath="$PROJECT_DIR$/docGia.h" beforeDir="false" afterPath="$PROJECT_DIR$/docGia.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hamExtra.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/hamExtra.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hamExtra.h" beforeDir="false" afterPath="$PROJECT_DIR$/hamExtra.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.h" beforeDir="false" afterPath="$PROJECT_DIR$/header.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/menu.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menu.h" beforeDir="false" afterPath="$PROJECT_DIR$/menu.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phieuMuonSach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/phieuMuonSach.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phieuMuonSach.h" beforeDir="false" afterPath="$PROJECT_DIR$/phieuMuonSach.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phieuTraSach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/phieuTraSach.cpp" afterDir="false" />
@@ -139,7 +136,7 @@
       <workItem from="1745648041399" duration="26065000" />
       <workItem from="1745767764377" duration="7402000" />
       <workItem from="1745825754994" duration="19028000" />
-      <workItem from="1745907647291" duration="11976000" />
+      <workItem from="1745907647291" duration="36182000" />
     </task>
     <servers />
   </component>
@@ -150,21 +147,5 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/header.h</url>
-          <line>8</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/thongKe.cpp</url>
-          <line>72</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

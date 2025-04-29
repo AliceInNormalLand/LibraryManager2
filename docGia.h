@@ -21,7 +21,6 @@ extern char ngayLapThe[MAX_USERS][MAX_DATE_LENGTH];
 extern char ngayHetHan[MAX_USERS][MAX_DATE_LENGTH];
 
 //Khai báo tên hàm
-void nhapNgayLapThe(int index);
 void themDocGia();
 void xuatDanhSach();
 void suaThongTinDocGia();

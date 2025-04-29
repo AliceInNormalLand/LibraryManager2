@@ -22,7 +22,6 @@ extern char soLuong[MAX_SACH][MAX_TEXT_LENGTH];
 
 //Khai báo tên hàm
 void xemDanhSachSach();
-int tonTaiISBN(const char* isbn);
 void themSach();
 void timKiemISBN();
 void timKiemTen();

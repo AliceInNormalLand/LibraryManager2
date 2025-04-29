@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "header.h"
+// Hàm main, chương trình sẽ bắt đầu từ hàm này
 int main()
 {
     int chon;
@@ -10,7 +11,7 @@ int main()
         switch (chon)
         {
             case 1: printf("|  QUAN LY DOC GIA  |");
-            quanLyDocGia();
+            quanLyDocGia(); // Gọi tên hàm để sử dụng
             break;
             case 2: printf("|  QUAN LY SACH  |");
             quanLySach();
@@ -28,7 +29,6 @@ int main()
             break;
             case 6: printf("|  THOAT CHUONG TRINH  |");
             return 0;
-            //break;
             default: printf("Khong co chuc nang nay! Hay thu chuc nang khac."); break;
         }
     }

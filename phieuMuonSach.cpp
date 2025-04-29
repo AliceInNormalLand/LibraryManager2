@@ -7,6 +7,7 @@
 #define MAX_STRING 50
 
 // Các mảng 1 chiều cần có:
+int maPhieuMuon[MAX_PHIEUMUON];
 char maDocGiaPhieuMuon[MAX_PHIEUMUON][50];
 char isbnPhieuMuon[MAX_PHIEUMUON][50];
 char ngayMuon[MAX_PHIEUMUON][50];
@@ -15,6 +16,8 @@ char ngayTraDuKien[MAX_PHIEUMUON][50];
 int soPhieuMuon = 0; //Số phiếu mượn ban đầu
 
 // Hàm nhập phiếu mượn sách
+// Có thể nhập nhiều phiếu mượn cùng lúc
+// Nhập vào số lượng phiếu mượn muốn tạo, nhập thông tin cho từng phiếu mượn, cập nhật số phiếu mượn
 void nhapMuonSach() {
     int soPhieuMoi;
 
@@ -33,7 +36,9 @@ void nhapMuonSach() {
     }
 
     for (int i = soPhieuMuon; i < soPhieuMuon + soPhieuMoi; i++) {
+
         printf("\nNhap thong tin phieu muon thu %d:\n", i + 1);
+        // Tao ma phieu muon
 
         // Nhập mã độc giả
         while (1) {
@@ -68,6 +73,7 @@ void nhapMuonSach() {
         cong7Ngay(ngayMuon[i], ngayTraDuKien[i]);
         printf("Ngay tra du kien: %s\n", ngayTraDuKien[i]);
 
+        maPhieuMuon[i] += i ;
         capNhatSauMuon(isbnPhieuMuon[i]);
     }
     soPhieuMuon += soPhieuMoi;
@@ -75,11 +81,11 @@ void nhapMuonSach() {
 
 // Hàm xuất phiếu mượn sách
 void xuatMuonSach() {
-    printf("\n%-15s | %-20s | %-15s | %-15s\n", "Ma doc gia", "ISBN", "Ngay muon", "Ngay tra du kien");
+    printf("\n%-15s | %-15s | %-20s | %-15s | %-15s\n", "Ma phieu muon" , "Ma doc gia", "ISBN", "Ngay muon", "Ngay tra du kien");
     printf("--------------------------------------------------------------------------\n");
 
     for (int i = 0; i < soPhieuMuon; i++) {
-        printf("%-15s | %-20s | %-15s | %-15s\n",
-            maDocGiaPhieuMuon[i], isbnPhieuMuon[i], ngayMuon[i], ngayTraDuKien[i]);
+        printf("%-15d | %-15s | %-20s | %-15s | %-15s\n",
+            maPhieuMuon[i],maDocGiaPhieuMuon[i], isbnPhieuMuon[i], ngayMuon[i], ngayTraDuKien[i]);
     }
 }

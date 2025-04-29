@@ -5,6 +5,7 @@
 #define MAX_PHIEUTRA 100
 #define MAX_STRING 50
 
+int maPhieuTra[MAX_PHIEUTRA];
 char maDocGiaPhieuTra[MAX_PHIEUTRA][MAX_STRING];
 char isbnPhieuTra[MAX_PHIEUTRA][MAX_STRING];
 char ngayMuonPhieuTra[MAX_PHIEUTRA][MAX_STRING];
@@ -16,6 +17,8 @@ int tienPhatPhieuTra[MAX_PHIEUTRA];
 int soPhieuTra = 0;
 
 // Hàm nhập phiếu trả sách
+// Có thể nhập nhiều phiếu trả cùng lúc
+// Nhập vào số lượng phiếu trả muốn tạo, nhập thông tin cho từng phiếu trả, cập nhật số phiếu trả
 void nhapTraSach() {
     int soPhieuMoi;
     // Nhập số lượng phiếu muốn thêm
@@ -35,29 +38,43 @@ void nhapTraSach() {
     for (int i = soPhieuTra; i < soPhieuTra + soPhieuMoi; i++) {
         printf("\nNhap thong tin phieu tra thu %d:\n", i + 1);
 
+
         // Mã độc giả + ISBN
         while (1) {
-            printf("Ma doc gia: ");
-            fgets(maDocGiaPhieuTra[i], MAX_STRING, stdin);
-            maDocGiaPhieuTra[i][strcspn(maDocGiaPhieuTra[i], "\n")] = '\0';
+            printf("Ma phieu muon: ");
+            // fgets(maPhieuTra[i], MAX_STRING, stdin);
 
-            printf("ISBN: ");
-            fgets(isbnPhieuTra[i], MAX_STRING, stdin);
-            isbnPhieuTra[i][strcspn(isbnPhieuTra[i], "\n")] = '\0';
+            int daTonTaiTrongMang = 0;
 
-            int check = tonTaiMaDGVaMaSach(maDocGiaPhieuTra[i], isbnPhieuTra[i]);
-            if (check == 1) break;
-            else if (check == -1)
-                printf("[X] Co ma doc gia nhung khong muon sach nay! Nhap lai!\n");
-            else
-                printf("[X] Ma doc gia khong ton tai trong phieu muon! Nhap lai!\n");
+            scanf_s("%d", &maPhieuTra[i]);
+            for (int j = 0; j < soPhieuTra; j++) {
+                for (int k = 0; k < soPhieuTra; k++) {
+                    if (maPhieuTra[i] == maPhieuTra[j]) {
+                        daTonTaiTrongMang = 1;
+                        break;
+                    }
+                }
+            }
+            if (daTonTaiTrongMang) {
+                printf("[X] Phieu muon nay da tra roi! Nhap lai!\n");
+            }else {
+                int daTonTai = 0;
+                for (int j = 0; j < soPhieuMuon; j++) {
+                    if (maPhieuTra[i] == maPhieuMuon[j]) {
+                        strcpy(maDocGiaPhieuTra[i], maDocGiaPhieuMuon[j]);
+                        strcpy(isbnPhieuTra[i], isbnPhieuMuon[j]);
+                        strcpy(ngayMuonPhieuTra[i], ngayMuon[j]);
+                        daTonTai = 1;
+                        break;
+                    }
+                }
+                if (daTonTai) {
+                    break;
+                }
+                printf("[X] Khong co ma phieu muon! Nhap lai!\n");
+            }
         }
-
-        // Ngày mượn
-        printf("Ngay muon (dd/mm/yyyy): ");
-        fgets(ngayMuonPhieuTra[i], MAX_STRING, stdin);
-        ngayMuonPhieuTra[i][strcspn(ngayMuonPhieuTra[i], "\n")] = '\0';
-
+        while (getchar() != '\n');
         // Tính ngày trả dự kiến
         cong7Ngay(ngayMuonPhieuTra[i], ngayTraDuKienPhieuTra[i]);
         printf("=> Ngay tra du kien: %s\n", ngayTraDuKienPhieuTra[i]);
@@ -68,14 +85,14 @@ void nhapTraSach() {
         ngayTraThucTePhieuTra[i][strcspn(ngayTraThucTePhieuTra[i], "\n")] = '\0';
 
         // Tình trạng
-        printf("Tinh trang (qua han / da tra / mat / dang muon): ");
+        printf("Tinh trang (qua han / da tra / mat): ");
         fgets(tinhTrangPhieuTra[i], MAX_STRING, stdin);
         tinhTrangPhieuTra[i][strcspn(tinhTrangPhieuTra[i], "\n")] = '\0';
 
         // Tiền phạt
         tienPhatPhieuTra[i] = 0;
         if (strcmp(tinhTrangPhieuTra[i], "mat") == 0) {
-            tienPhatPhieuTra[i] = 200; // Mất sách, phạt 200%
+            tienPhatPhieuTra[i] = tinhTienPhatMatSach(isbnPhieuTra[i]) ; // Mất sách, phạt 200%
         }
         else if (strcmp(tinhTrangPhieuTra[i], "qua han") == 0) {
             tienPhatPhieuTra[i] = tinhTienPhat(ngayMuonPhieuTra[i], ngayTraThucTePhieuTra[i]);
@@ -95,14 +112,14 @@ void xuatTraSach() {
         return;
     }
 
-    printf("\n%-5s %-15s %-15s %-15s %-20s %-20s %-20s %-10s\n",
-           "STT", "Ma Doc Gia", "ISBN", "Ngay Muon", "Ngay Tra Du Kien",
+    printf("\n%-15s %-15s %-15s %-15s %-20s %-20s %-20s %-10s\n",
+           "Ma phieu muon", "Ma Doc Gia", "ISBN", "Ngay Muon", "Ngay Tra Du Kien",
            "Ngay Tra Thuc Te", "Tinh Trang", "Tien Phat");
     printf("-------------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < soPhieuTra; i++) {
-        printf("%-5d %-15s %-15s %-15s %-20s %-20s %-20s %-10d\n",
-               i + 1,
+        printf("%-15d %-15s %-15s %-15s %-20s %-20s %-20s %-10d\n",
+               maPhieuTra[i],
                maDocGiaPhieuTra[i],
                isbnPhieuTra[i],
                ngayMuonPhieuTra[i],

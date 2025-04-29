@@ -24,26 +24,9 @@ char ngayHetHan[MAX_USERS][MAX_DATE_LENGTH] = {"01/01/2026", "15/02/2025", "12/0
 //Số độc giả ban đầu là 3
 int soDocGia = 3;
 
-// Hàm nhập ngày lập thẻ và tự động tính ngày hết hạn
-void nhapNgayLapThe(int index) {
-    char ngayNhap[9];
-    printf("Ngay lap the (ddmmyyyy): ");
-    fgets(ngayNhap, 9, stdin);
-    while (getchar() != '\n'); // Clear buffer
-    char day[3], month[3], year[5];
-    strncpy(day, ngayNhap, 2); day[2] = '\0';
-    strncpy(month, ngayNhap + 2, 2); month[2] = '\0';
-    strncpy(year, ngayNhap + 4, 4); year[4] = '\0';
-    sprintf(ngayLapThe[index], "%s/%s/%s", day, month, year);
-    // Cộng thêm 48 tháng
-    int d = atoi(day);
-    int m = atoi(month) + 48;
-    int y = atoi(year) + (m - 1) / 12;
-    m = (m - 1) % 12 + 1;
-    sprintf(ngayHetHan[index], "%02d/%02d/%04d", d, m, y);
-}
-
 // Hàm thêm độc giả mới
+// Nhập vào từng thuộc tính, mỗi thuộc tính là 1 mảng 1 chiều,
+// Lưu lại dữ liệu trong từng mảng đó, cập nhật lại số lượng độc giả sau khi thêm
 void themDocGia() {
     if (soDocGia >= MAX_USERS) {
         printf("Danh sach day!\n");
@@ -88,6 +71,7 @@ void themDocGia() {
     fgets(diaChi[soDocGia], MAX_TEXT_LENGTH, stdin);
     diaChi[soDocGia][strcspn(diaChi[soDocGia], "\n")] = 0;
 
+    // Nhập vào ngày lập thẻ và tự tính ngày hết hạn
     nhapNgayLapThe(soDocGia);
 
     soDocGia++;
@@ -107,12 +91,15 @@ void xuatDanhSach() {
 }
 
 // Hàm sửa thông tin độc giả
+// Nhập vào mã độc giả muốn sửa, nếu có thì chỉnh sửa thông tin, nếu không thì thông báo không có mã đó
+// Không sửa lại mã độc giả, các thông tin phải được nhập đầy đủ
+// Nhập đúng theo định dạng được gợi ý, ví dụ dd/mm/yyyy -> 21/10/2002
 void suaThongTinDocGia() {
     char id[MAX_DOC_GIA_ID_LENGTH];
     int found = 0;
 
     while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
-    printf("Nhap ma doc gia can sua: ");
+    printf("\nNhap ma doc gia can sua: ");
     fgets(id, MAX_DOC_GIA_ID_LENGTH, stdin);
     id[strcspn(id, "\n")] = 0;
 
@@ -150,18 +137,18 @@ void suaThongTinDocGia() {
             break;
         }
     }
-
     if (!found) {
         printf("Khong tim thay ma doc gia.\n");
     }
 }
 
 // Hàm xóa thông tin độc giả
+// Nhập vào mã độc giả cần xóa, nếu có thì xóa thông tin, nếu không có thì thông báo không tìm thấy mã, quay về menu
 void xoaThongTinDocGia() {
     char id[MAX_DOC_GIA_ID_LENGTH];
     int found = 0;
-    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
-    printf("Nhap ma doc gia can xoa: ");
+    while (getchar() != '\n');
+    printf("\nNhap ma doc gia can xoa: ");
     fgets(id, MAX_DOC_GIA_ID_LENGTH, stdin);
     id[strcspn(id, "\n")] = 0;
 
@@ -191,11 +178,12 @@ void xoaThongTinDocGia() {
 }
 
 // Hàm tìm kiếm thông tin độc giả bằng số chứng minh nhân dân
+// Nhập vào số CMND, xuất ra thông tin của độc giả tương ứng
 void timKiemDocGiaTheoCMND() {
     char cmndToSearch[MAX_TEXT_LENGTH];
     int found = 0;
     while (getchar() != '\n'); // clear "\n"
-    printf("Nhap CMND doc gia can tim: ");
+    printf("\nNhap CMND doc gia can tim: ");
     fgets(cmndToSearch, MAX_TEXT_LENGTH, stdin);
     cmndToSearch[strcspn(cmndToSearch, "\n")] = 0;
 
@@ -215,18 +203,18 @@ void timKiemDocGiaTheoCMND() {
             break;
         }
     }
-
     if (!found) {
         printf("Khong tim thay doc gia voi CMND nay.\n");
     }
 }
 
 // Hàm tìm kiếm độc giả theo họ tên
+// Nhập vào họ tên, xuất ra thông tin của độc giả tương ứng
 void timKiemDocGiaTheoHoTen() {
     char hoTenToSearch[MAX_TEXT_LENGTH];
     int found = 0;
     while (getchar() != '\n');
-    printf("Nhap ho ten doc gia can tim: ");
+    printf("\nNhap ho ten doc gia can tim: ");
     fgets(hoTenToSearch, MAX_TEXT_LENGTH, stdin);
     hoTenToSearch[strcspn(hoTenToSearch, "\n")] = 0;
 
@@ -245,7 +233,6 @@ void timKiemDocGiaTheoHoTen() {
             found = 1;
         }
     }
-
     if (!found) {
         printf("Khong tim thay doc gia voi ten nay.\n");
     }

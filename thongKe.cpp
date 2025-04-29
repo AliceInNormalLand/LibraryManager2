@@ -2,6 +2,8 @@
 #include <string>
 
 // Hàm thống kê số lượng sách trong thư viện
+// Đầu vào là số lượng của từng đầu sách và số lượng đầu sách
+// Đầu ra là tổng số lượng của tất cả các đầu sách
 int thongKeSachTV(char soLuongSach[][50], int soSach) {
     int tong = 0;
     for (int i = 0; i < soSach; i++) {
@@ -12,6 +14,8 @@ int thongKeSachTV(char soLuongSach[][50], int soSach) {
 }
 
 // Hàm thống kê số lượng sách theo thể loại
+// Đầu vào là thể loại và số đầu sách
+// Đầu ra là số lượng theo từng thể loại sách
 void thongKeLoaiSach(char theLoai[][50], int soSach) {
     for (int i = 0; i < soSach; i++) {
         int daTonTai = 0;
@@ -37,6 +41,8 @@ void thongKeLoaiSach(char theLoai[][50], int soSach) {
 }
 
 // Thống kê số lượng độc giả
+// Đầu vào là mã độc giả từ phiếu mượn, số lượng phiếu mượn và tổng số độc giả
+// Đầu ra là tổng số độc giả hiện tại, số độc giả đang mượn sách
 void thongKeDocGia(char maDocGiaPhieuMuon[][50], int soPhieuMuon, int tongDocGia) {
     printf("Tong so doc gia: %d\n", tongDocGia);
     printf("==========================================\n");
@@ -70,6 +76,8 @@ void thongKeDocGia(char maDocGiaPhieuMuon[][50], int soPhieuMuon, int tongDocGia
 }
 
 // Thống kê số lương độc giả theo giới tính
+// Đầu vào là giới tính và tổng số độc giả
+// Đầu ra là tổng số độc giả theo từng giới tính
 void thongKeGioiTinh(char gioiTinh[][10], int soDocGia) {
     for (int i = 0; i < soDocGia; i++) {
         int daTonTai = 0;
@@ -94,6 +102,8 @@ void thongKeGioiTinh(char gioiTinh[][10], int soDocGia) {
 }
 
 // Thống kê số sách đang được mượn
+// Đầu vào là số lượng phiếu mượn và trả
+// Đầu ra là bảng tất cả các mã sách với số lượng đang mượn và số lượng tồn kho tương ứng
 void thongKeSachMuon(int soPhieuMuon, int soPhieuTra) {
     int dangMuon = soPhieuMuon - soPhieuTra;
     printf("So sach dang duoc muon la: %d\n", dangMuon);
@@ -103,7 +113,7 @@ void thongKeSachMuon(int soPhieuMuon, int soPhieuTra) {
             int daTonTai = 0;
             if (strcmp(ISBN[i], isbnPhieuMuon[j]) == 0) {
                 for (int k = 0; k < soPhieuTra; k++) {
-                    if (strcmp(maDocGiaPhieuMuon[j], maDocGiaPhieuMuon[k]) == 0 && strcmp(isbnPhieuMuon[j], isbnPhieuTra[k]) == 0) {
+                    if (maPhieuMuon[j] == maPhieuTra[k]) {
                         daTonTai = 1;
                         break;
                     }
@@ -118,14 +128,26 @@ void thongKeSachMuon(int soPhieuMuon, int soPhieuTra) {
 }
 
 // Thống kê danh sách độc giả bị trễ hạn
-int thongKeTreHan(int tienPhatPhieuTra[], int soPhieuTra) {
+// Đầu vào là số lượng phiếu trả
+// Đầu ra là thông tin của các độc giả bị trễ hạn, sách họ mượn, tiền phạt của họ
+int thongKeTreHan(int soPhieuTra) {
     int count = 0;
+    printf("\n%-15s %-15s %-15s %-15s %-15s\n",
+           "Ma phieu muon", "Ma Doc Gia", "ISBN", "Tinh trang", "Tien phat");
+    printf("-------------------------------------------------------------------\n");
     for (int i = 0; i < soPhieuTra; i++) {
-        if (tienPhatPhieuTra[i] > 0) {
+        if (strcmp(tinhTrangPhieuTra[i], "qua han") == 0) {
+            printf("%-15d %-15s %-15s %-15s %-15d\n",
+               maPhieuTra[i],
+               maDocGiaPhieuTra[i],
+               isbnPhieuTra[i],
+               tinhTrangPhieuTra[i],
+               tienPhatPhieuTra[i]);
             count++;
         }
     }
     printf("So doc gia bi tre han la: %d\n", count);
+
     return count;
 }
 
@@ -179,7 +201,7 @@ void thongKeCoBan() {
 
             case 'f':
                 printf("\n|  Ban dang: Thong ke so doc gia bi tre han  |\n");
-            thongKeTreHan(tienPhatPhieuTra, soPhieuTra);
+            thongKeTreHan(soPhieuTra);
             break;
 
             case 'g':

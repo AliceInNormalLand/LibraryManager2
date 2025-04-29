@@ -33,15 +33,10 @@ void xemDanhSachSach() {
     }
 }
 
-// Hàm kiểm tra ISBN đã tồn tại chưa
-int tonTaiISBN(const char* isbn) {
-    for (int i = 0; i < soSach; i++) {
-        if (strcmp(ISBN[i], isbn) == 0) return 1;
-    }
-    return 0;
-}
-
 // Hàm thêm sách
+// Có thể nhập một lúc nhiều sách
+// Nhập vào số lượng sách muốn thêm trong 1 lần, sau đó nhập thông tin của từng sách theo thứ tự
+// Sau khi nhập xong thì cập nhật số đầu sách hiện tại
 void themSach() {
     int soMoi;
     printf("Nhap so luong sach muon them: ");
@@ -60,7 +55,7 @@ void themSach() {
         fgets(isbnTam, MAX_TEXT_LENGTH, stdin);
         isbnTam[strcspn(isbnTam, "\n")] = 0;
 
-        if (tonTaiISBN(isbnTam)) {
+        if (tonTaiMaSach(isbnTam)) {
             printf("ISBN da ton tai! Vui long nhap lai.\n");
             continue;
         }
@@ -102,6 +97,7 @@ void themSach() {
 }
 
 // Hàm tìm sách theo ISBN
+// Nhập mã sách xuất ra thông tin sách tương ứng, nếu không có thì báo lỗi
 void timKiemISBN() {
     char isbn[MAX_TEXT_LENGTH];
     while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
@@ -128,6 +124,7 @@ void timKiemISBN() {
 }
 
 // Hàm tìm sách theo tên
+// Nhập tên sách xuất ra thông tin sách tương ứng, nếu không có thì báo lỗi
 void timKiemTen() {
     char ten[MAX_TEXT_LENGTH];
     while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
@@ -153,6 +150,8 @@ void timKiemTen() {
 }
 
 // Hàm chỉnh sửa sách
+// Nhập mã sách cần chỉnh sửa, tiến hành sửa thông tin sách, KHÔNG sửa được mã sách
+// Nếu không tìm thấy mã sách thì báo lỗi
 void chinhSuaSach() {
     char isbn[MAX_TEXT_LENGTH];
     while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
@@ -200,6 +199,8 @@ void chinhSuaSach() {
 }
 
 // Hàm xóa sách
+// Nhập mã sách cần xóa, tiến hành xóa thông tin sách
+// Nếu không tìm thấy mã sách thì báo lỗi
 void xoaSach() {
     char isbn[MAX_TEXT_LENGTH];
     while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
