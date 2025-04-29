@@ -1,18 +1,17 @@
-//
-// Created by VICTUS on 4/18/2025.
-//
+#pragma once
 
-#ifndef HAMEXTRA_H
-#define HAMEXTRA_H
+#include "sach.h"
+#include "phieuMuonSach.h"
 
-#endif //HAMEXTRA_H
-// Tính tổng số ngày của 1 năm tới 1 ngày cụ thể
+// Khai báo toàn cục
+extern void capNhatSauMuon(char maSachTV[]);
+extern void capNhatSauTra(char maSachTV[]);
+
+//Khai báo hàm
 int tinhSoNgayTrongNam(int d, int m, int y);
-
-// Tổng số ngày tính từ năm 0 tới ngày đó
 int tinhTongSoNgay(int d, int m, int y);
-
-// Hàm tính tiền phạt
 int tinhTienPhat(char ngayMuon[], char ngayTraThucTe[]);
-
 void cong7Ngay(char ngayMuon[], char ngayTraDuKien[]);
+int tonTaiMaDocGia(char maDocGiaNhap[]);
+int tonTaiMaSach(char maSachNhap[]);
+int tonTaiMaDGVaMaSach(char maDocGia[], char maISBN[]);

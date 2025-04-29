@@ -1,8 +1,9 @@
-//
-// Created by VICTUS on 4/18/2025.
-//
 #include <string.h>
 #include <stdio.h>
+#include "hamExtra.h"
+
+#include "docGia.h"
+
 
 // Tính tổng số ngày của 1 năm tới 1 ngày cụ thể
 int tinhSoNgayTrongNam(int d, int m, int y) {
@@ -63,4 +64,61 @@ void cong7Ngay(char ngayMuon[], char ngayTraDuKien[]) {
         }
     }
     sprintf(ngayTraDuKien, "%02d/%02d/%04d", d, m, y);
+}
+
+// Hàm cập nhật số lượng sách sau khi mượn
+void capNhatSauMuon(char maSachTV[]) {
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ISBN[i], maSachTV) == 0) {
+            int soLuongSach = atoi(soLuong[i]);
+            soLuongSach -= 1;
+            sprintf(soLuong[i], "%d", soLuongSach); // chuyển thẳng số thành chuỗi
+        }
+    }
+}
+
+// Hàm cập nhật số lượng sách sau khi trả
+void capNhatSauTra(char maSachTV[]) {
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ISBN[i], maSachTV) == 0) {
+            int soLuongSach = atoi(soLuong[i]);
+            soLuongSach += 1;
+            sprintf(soLuong[i], "%d", soLuongSach); // chuyển thẳng số thành chuỗi
+        }
+    }
+}
+
+int tonTaiMaDocGia(char maDocGiaNhap[]) {
+    for (int i = 0; i < soDocGia; i++) {
+        if (strcmp(maDocGia[i], maDocGiaNhap) == 0) {
+            return 1; // Mã độc giả đã tồn tại
+        }
+        return 0; // Chưa có
+    }
+}
+
+// Hàm kiểm tra mã sách có tồn tại chưa
+int tonTaiMaSach(char maSachNhap[]) {
+    for (int i = 0; i < soSach; i++) {
+        if (strcmp(ISBN[i], maSachNhap) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// Kiểm tra mã độc giả và mã sách của phiếu trả có trùng phiếu mượn chưa
+int tonTaiMaDGVaMaSach(char maDocGia[], char maISBN[]) {
+    int coMaDocGia = 0; // đánh dấu nếu tìm thấy mã độc giả
+
+    for (int i = 0; i < soPhieuMuon; i++) {
+        if (strcmp(maDocGiaPhieuMuon[i], maDocGia) == 0) {
+            coMaDocGia = 1;
+            if (strcmp(isbnPhieuMuon[i], maISBN) == 0) {
+                return 1; // đúng cả mã độc giả và ISBN
+            }
+        }
+    }
+    if (coMaDocGia) return -1; // tìm thấy mã độc giả nhưng sai ISBN
+    return 0; // không tìm thấy mã độc giả
 }
