@@ -4,10 +4,10 @@
 // Hàm thống kê số lượng sách trong thư viện
 // Đầu vào là số lượng của từng đầu sách và số lượng đầu sách
 // Đầu ra là tổng số lượng của tất cả các đầu sách
-int thongKeSachTV(char soLuongSach[][50], int soSach) {
+int thongKeSachTV(sach danhSachSach[], int soSach) {
     int tong = 0;
     for (int i = 0; i < soSach; i++) {
-        tong += atoi(soLuongSach[i]);
+        tong += atoi(danhSachSach[i].soLuong);
     }
     printf("Tong so sach trong thu vien la: %d\n", tong);
     return tong;
@@ -16,12 +16,12 @@ int thongKeSachTV(char soLuongSach[][50], int soSach) {
 // Hàm thống kê số lượng sách theo thể loại
 // Đầu vào là thể loại và số đầu sách
 // Đầu ra là số lượng theo từng thể loại sách
-void thongKeLoaiSach(char theLoai[][50], int soSach) {
+void thongKeLoaiSach(sach danhSachSach[], int soSach) {
     for (int i = 0; i < soSach; i++) {
         int daTonTai = 0;
 
         for (int j = 0; j < i; j++) {
-            if (strcmp(theLoai[i], theLoai[j]) == 0) {
+            if (strcmp(danhSachSach[i].theLoai, danhSachSach[j].theLoai) == 0) {
                 daTonTai = 1;
                 break;
             }
@@ -30,12 +30,12 @@ void thongKeLoaiSach(char theLoai[][50], int soSach) {
         if (!daTonTai) {
             int dem = 0;
             for (int k = 0; k < soSach; k++) {
-                if (strcmp(theLoai[i], theLoai[k]) == 0) {
-                    int soLuongS = atoi(soLuong[k]);
+                if (strcmp(danhSachSach[i].theLoai, danhSachSach[k].theLoai) == 0) {
+                    int soLuongS = atoi(danhSachSach[k].soLuong);
                     dem += soLuongS;
                 }
             }
-            printf("The loai: %s - So luong: %d\n", theLoai[i], dem);
+            printf("The loai: %s - So luong: %d\n", danhSachSach[i].theLoai, dem);
         }
     }
 }
@@ -43,7 +43,7 @@ void thongKeLoaiSach(char theLoai[][50], int soSach) {
 // Thống kê số lượng độc giả
 // Đầu vào là mã độc giả từ phiếu mượn, số lượng phiếu mượn và tổng số độc giả
 // Đầu ra là tổng số độc giả hiện tại, số độc giả đang mượn sách
-void thongKeDocGia(char maDocGiaPhieuMuon[][50], int soPhieuMuon, int tongDocGia) {
+void thongKeDocGia(phieuMuon danhSachPMuon[], int soPhieuMuon, int tongDocGia) {
     printf("Tong so doc gia: %d\n", tongDocGia);
     printf("==========================================\n");
     printf("Bang thong ke doc gia muon sach\n");
@@ -56,7 +56,7 @@ void thongKeDocGia(char maDocGiaPhieuMuon[][50], int soPhieuMuon, int tongDocGia
             int daTonTai = 0;
 
             for (int j = 0; j < i; j++) {
-                if (strcmp(maDocGiaPhieuMuon[i], maDocGiaPhieuMuon[j]) == 0) {
+                if (strcmp(danhSachPMuon[i].maDocGiaPhieuMuon, danhSachPMuon[j].maDocGiaPhieuMuon) == 0) {
                     daTonTai = 1;
                     break;
                 }
@@ -65,11 +65,11 @@ void thongKeDocGia(char maDocGiaPhieuMuon[][50], int soPhieuMuon, int tongDocGia
             if (!daTonTai) {
                 int dem = 0;
                 for (int k = 0; k < soPhieuMuon; k++) {
-                    if (strcmp(maDocGiaPhieuMuon[i], maDocGiaPhieuMuon[k]) == 0) {
+                    if (strcmp(danhSachPMuon[i].maDocGiaPhieuMuon, danhSachPMuon[k].maDocGiaPhieuMuon) == 0) {
                         dem++;
                     }
                 }
-                printf("Doc gia ma %s - So luot muon: %d\n", maDocGiaPhieuMuon[i], dem);
+                printf("Doc gia ma %s - So luot muon: %d\n", danhSachPMuon[i].maDocGiaPhieuMuon, dem);
             }
         }
     }
@@ -78,12 +78,12 @@ void thongKeDocGia(char maDocGiaPhieuMuon[][50], int soPhieuMuon, int tongDocGia
 // Thống kê số lương độc giả theo giới tính
 // Đầu vào là giới tính và tổng số độc giả
 // Đầu ra là tổng số độc giả theo từng giới tính
-void thongKeGioiTinh(char gioiTinh[][10], int soDocGia) {
+void thongKeGioiTinh(docGia danhSachDocGia[], int soDocGia) {
     for (int i = 0; i < soDocGia; i++) {
         int daTonTai = 0;
 
         for (int j = 0; j < i; j++) {
-            if (strcmp(gioiTinh[i], gioiTinh[j]) == 0) {
+            if (strcmp(danhSachDocGia[i].gioiTinh, danhSachDocGia[j].gioiTinh) == 0) {
                 daTonTai = 1;
                 break;
             }
@@ -92,11 +92,11 @@ void thongKeGioiTinh(char gioiTinh[][10], int soDocGia) {
         if (!daTonTai) {
             int dem = 0;
             for (int k = 0; k < soDocGia; k++) {
-                if (strcmp(gioiTinh[i], gioiTinh[k]) == 0) {
+                if (strcmp(danhSachDocGia[i].gioiTinh, danhSachDocGia[k].gioiTinh) == 0) {
                     dem++;
                 }
             }
-            printf("Gioi tinh: %s - So luong: %d\n", gioiTinh[i], dem);
+            printf("Gioi tinh: %s - So luong: %d\n", danhSachDocGia[i].gioiTinh, dem);
         }
     }
 }
@@ -111,9 +111,9 @@ void thongKeSachMuon(int soPhieuMuon, int soPhieuTra) {
         int dem = 0;
         for (int j = 0; j < soPhieuMuon; j++) {
             int daTonTai = 0;
-            if (strcmp(ISBN[i], isbnPhieuMuon[j]) == 0) {
+            if (strcmp(danhSachSach[i].ISBN, danhSachPMuon[j].isbnPhieuMuon) == 0) {
                 for (int k = 0; k < soPhieuTra; k++) {
-                    if (maPhieuMuon[j] == maPhieuTra[k]) {
+                    if (danhSachPMuon[j].maPhieuMuon == danhSachPTra[k].maPhieuTra) {
                         daTonTai = 1;
                         break;
                     }
@@ -123,7 +123,7 @@ void thongKeSachMuon(int soPhieuMuon, int soPhieuTra) {
                 }
             }
         }
-        printf("Ma sach: %s | So sach dang muon: %d | Ton kho: %s\n", ISBN[i], dem, soLuong[i]);
+        printf("Ma sach: %s | So sach dang muon: %d | Ton kho: %s\n", danhSachSach[i].ISBN, dem, danhSachSach[i].soLuong);
     }
 }
 
@@ -136,13 +136,13 @@ int thongKeTreHan(int soPhieuTra) {
            "Ma phieu muon", "Ma Doc Gia", "ISBN", "Tinh trang", "Tien phat");
     printf("-------------------------------------------------------------------\n");
     for (int i = 0; i < soPhieuTra; i++) {
-        if (strcmp(tinhTrangPhieuTra[i], "qua han") == 0) {
+        if (strcmp(danhSachPTra[i].tinhTrangPhieuTra, "qua han") == 0) {
             printf("%-15d %-15s %-15s %-15s %-15d\n",
-               maPhieuTra[i],
-               maDocGiaPhieuTra[i],
-               isbnPhieuTra[i],
-               tinhTrangPhieuTra[i],
-               tienPhatPhieuTra[i]);
+               danhSachPTra[i].maPhieuTra,
+               danhSachPTra[i].maDocGiaPhieuTra,
+               danhSachPTra[i].isbnPhieuTra,
+               danhSachPTra[i].tinhTrangPhieuTra,
+               danhSachPTra[i].tienPhatPhieuTra);
             count++;
         }
     }
@@ -176,22 +176,22 @@ void thongKeCoBan() {
         switch (chon) {
             case 'a':
                 printf("\n|  Ban dang: Thong ke tong so sach trong thu vien  |\n");
-            thongKeSachTV(soLuong, soSach);
+            thongKeSachTV(danhSachSach, soSach);
             break;
 
             case 'b':
                 printf("\n|  Ban dang: Thong ke so luong sach theo the loai  |\n");
-            thongKeLoaiSach(theLoai, soSach);
+            thongKeLoaiSach(danhSachSach, soSach);
             break;
 
             case 'c':
                 printf("\n|  Ban dang: Thong ke tong so doc gia va so luot muon  |\n");
-            thongKeDocGia(maDocGiaPhieuMuon, soPhieuMuon, soDocGia);
+            thongKeDocGia(danhSachPMuon, soPhieuMuon, soDocGia);
             break;
 
             case 'd':
                 printf("\n|  Ban dang: Thong ke so luong doc gia theo gioi tinh  |\n");
-            thongKeGioiTinh(gioiTinh, soDocGia);
+            thongKeGioiTinh(danhSachDocGia, soDocGia);
             break;
 
             case 'e':

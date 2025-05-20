@@ -3,23 +3,12 @@
 #include <string.h>
 #include "docGia.h"
 
-#define MAX_USERS 100
-#define MAX_TEXT_LENGTH 100
-#define MAX_DOC_GIA_ID_LENGTH 20
-#define MAX_DATE_LENGTH 20
-#define MAX_GENDER_LENGTH 10
-
-
 // Tạo danh sách độc giả demo
-char maDocGia[MAX_USERS][MAX_DOC_GIA_ID_LENGTH] = {"DG001", "DG002", "DG003"};
-char hoTen[MAX_USERS][MAX_TEXT_LENGTH] = {"Nguyen Thi Lan", "Tran Minh Tu", "Nguyen Van C"};
-char cmnd[MAX_USERS][MAX_TEXT_LENGTH] = {"123456789", "987654321", "456789125"};
-char birth[MAX_USERS][MAX_DATE_LENGTH] = {"21/03/1998", "15/05/2000", "13/07/2001"};
-char gioiTinh[MAX_USERS][MAX_GENDER_LENGTH] = {"Nu", "Nam", "Nam"};
-char email[MAX_USERS][MAX_TEXT_LENGTH] = {"lannt@gmail.com", "tmtu@gmail.com", "nguyenvanc@gmail.com"};
-char diaChi[MAX_USERS][MAX_TEXT_LENGTH] = {"123 Le Lai, TP.HCM", "456 Nguyen Thi Minh Khai, TP.HCM", "11 Hong Bang, TPHCM"};
-char ngayLapThe[MAX_USERS][MAX_DATE_LENGTH] = {"01/01/2022", "15/02/2021", "12/09/2023"};
-char ngayHetHan[MAX_USERS][MAX_DATE_LENGTH] = {"01/01/2026", "15/02/2025", "12/09/2027"};
+docGia danhSachDocGia[MAX_USERS] = {
+    {"DG001", "Nguyen Thi Lan", "123456789", "21/03/1998", "Nu", "Lannt@gmail.com", "123 Le Lai, TP.HCM", "01/01/2022", "01/01/2026"},
+    {"DG002", "Tran Minh Tu", "987654321", "15/05/2000", "Nam", "tmtu@gmail.com", "456 Nguyen Thi Minh Khai, TP.HCM", "15/02/2021", "15/02/2025"},
+    {"DG003", "Nguyen Van C", "456789125", "13/07/2001", "Nam", "nguyenvanc@gmail.com", "11 Hong Bang, TPHCM", "12/09/2023", "12/09/2027"}
+};
 
 //Số độc giả ban đầu là 3
 int soDocGia = 3;
@@ -38,43 +27,73 @@ void themDocGia() {
     printf("\nNhap thong tin doc gia thu %d:\n", soDocGia + 1);
 
     printf("Ma doc gia: ");
-    fgets(maDocGia[soDocGia], MAX_DOC_GIA_ID_LENGTH, stdin);
-    maDocGia[soDocGia][strcspn(maDocGia[soDocGia], "\n")] = 0;
+    fgets(danhSachDocGia[soDocGia].maDocGia, MAX_DOC_GIA_ID_LENGTH, stdin);
+    danhSachDocGia[soDocGia].maDocGia[strcspn(danhSachDocGia[soDocGia].maDocGia, "\n")] = 0;
 
     // Nếu mã độc giả đã tồn tại trước đó thì bắt nhập lại mã khác
-    if (tonTaiMaDocGia(maDocGia[soDocGia])) {
+    if (tonTaiMaDocGia(danhSachDocGia[soDocGia].maDocGia)) {
         printf("Ma doc gia da ton tai. Khong the them.\n");
         return;
     }
 
     printf("Ho ten: ");
-    fgets(hoTen[soDocGia], MAX_TEXT_LENGTH, stdin);
-    hoTen[soDocGia][strcspn(hoTen[soDocGia], "\n")] = 0;
+    fgets(danhSachDocGia[soDocGia].hoTen, MAX_TEXT_LENGTH, stdin);
+    danhSachDocGia[soDocGia].hoTen[strcspn(danhSachDocGia[soDocGia].hoTen, "\n")] = 0;
 
     printf("CMND: ");
-    fgets(cmnd[soDocGia], MAX_TEXT_LENGTH, stdin);
-    cmnd[soDocGia][strcspn(cmnd[soDocGia], "\n")] = 0;
+    fgets(danhSachDocGia[soDocGia].cmnd, MAX_TEXT_LENGTH, stdin);
+    danhSachDocGia[soDocGia].cmnd[strcspn(danhSachDocGia[soDocGia].cmnd, "\n")] = 0;
 
     printf("Ngay sinh (dd/mm/yyyy): ");
-    fgets(birth[soDocGia], MAX_DATE_LENGTH, stdin);
-    birth[soDocGia][strcspn(birth[soDocGia], "\n")] = 0;
+    fgets(danhSachDocGia[soDocGia].ngaySinh, MAX_DATE_LENGTH, stdin);
+    danhSachDocGia[soDocGia].ngaySinh[strcspn(danhSachDocGia[soDocGia].ngaySinh, "\n")] = 0;
 
     printf("Gioi tinh (Nam/Nu): ");
-    fgets(gioiTinh[soDocGia], MAX_GENDER_LENGTH, stdin);
-    gioiTinh[soDocGia][strcspn(gioiTinh[soDocGia], "\n")] = 0;
+    fgets(danhSachDocGia[soDocGia].gioiTinh, MAX_GENDER_LENGTH, stdin);
+    danhSachDocGia[soDocGia].gioiTinh[strcspn(danhSachDocGia[soDocGia].gioiTinh, "\n")] = 0;
 
     printf("Email: ");
-    fgets(email[soDocGia], MAX_TEXT_LENGTH, stdin);
-    email[soDocGia][strcspn(email[soDocGia], "\n")] = 0;
+    fgets(danhSachDocGia[soDocGia].email, MAX_TEXT_LENGTH, stdin);
+    danhSachDocGia[soDocGia].email[strcspn(danhSachDocGia[soDocGia].email, "\n")] = 0;
 
     printf("Dia chi: ");
-    fgets(diaChi[soDocGia], MAX_TEXT_LENGTH, stdin);
-    diaChi[soDocGia][strcspn(diaChi[soDocGia], "\n")] = 0;
+    fgets(danhSachDocGia[soDocGia].diaChi, MAX_TEXT_LENGTH, stdin);
+    danhSachDocGia[soDocGia].diaChi[strcspn(danhSachDocGia[soDocGia].diaChi, "\n")] = 0;
 
     // Nhập vào ngày lập thẻ và tự tính ngày hết hạn
     nhapNgayLapThe(soDocGia);
 
     soDocGia++;
+}
+
+
+
+// char maDocGia[MAX_DOC_GIA_ID_LENGTH];
+// char hoTen[MAX_TEXT_LENGTH];
+// char cmnd[MAX_TEXT_LENGTH];
+// char ngaySinh[MAX_DATE_LENGTH];
+// char gioiTinh[MAX_GENDER_LENGTH];
+// char email[MAX_TEXT_LENGTH];
+// char diaChi[MAX_TEXT_LENGTH];
+// char ngayLapThe[MAX_DATE_LENGTH];
+// char ngayHetHan[MAX_DATE_LENGTH];
+
+void GhiTapTin(docGia danhSachDocGia[], int soDocGia) {
+    FILE* file;
+    fopen_s(&file, "D:\\KHTN_NHAPMONLAPTRINH\\DanhSachDocGia.txt", "wt");
+    fprintf(file, "Tong so luong doc gia: %d\n", soDocGia);
+    fprintf(file, "\n%90s\n", "==== DANH SACH DOC GIA ====");
+    fprintf(file, "\n%-6s | %-20s | %-10s | %-10s | %-5s | %-20s | %-40s | %-12s | %-12s |\n",
+        "MaDG", "Ho Ten", "CMND", "Ngay sinh", "GT", "Email", "Dia chi", "Lap the", "Het han");
+    fprintf(file,"-----------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < soDocGia; i++)
+    {
+        fprintf(file, "%-6s | %-20s | %-10s | %-10s | %-5s | %-20s | %-40s | %-12s | %-12s |\n",
+            danhSachDocGia[i].maDocGia, danhSachDocGia[i].hoTen, danhSachDocGia[i].cmnd, danhSachDocGia[i].ngaySinh,
+            danhSachDocGia[i].gioiTinh, danhSachDocGia[i].email, danhSachDocGia[i].diaChi, danhSachDocGia[i].ngayLapThe, danhSachDocGia[i].ngayHetHan);
+    }
+    fclose(file);
 }
 
 // Hàm xuất danh sách độc giả
@@ -86,7 +105,8 @@ void xuatDanhSach() {
 
     for (int i = 0; i < soDocGia; i++) {
         printf("%-6s | %-20s | %-10s | %-10s | %-5s | %-20s | %-30s | %-12s | %-12s |\n",
-            maDocGia[i], hoTen[i], cmnd[i], birth[i], gioiTinh[i], email[i], diaChi[i], ngayLapThe[i], ngayHetHan[i]);
+            danhSachDocGia[i].maDocGia, danhSachDocGia[i].hoTen, danhSachDocGia[i].cmnd, danhSachDocGia[i].ngaySinh,
+            danhSachDocGia[i].gioiTinh, danhSachDocGia[i].email, danhSachDocGia[i].diaChi, danhSachDocGia[i].ngayLapThe, danhSachDocGia[i].ngayHetHan);
     }
 }
 
@@ -104,32 +124,32 @@ void suaThongTinDocGia() {
     id[strcspn(id, "\n")] = 0;
 
     for (int i = 0; i < soDocGia; i++) {
-        if (strcmp(maDocGia[i], id) == 0) {
+        if (strcmp(danhSachDocGia[i].maDocGia, id) == 0) {
             printf("\nChinh sua thong tin doc gia %d:\n", i + 1);
 
             printf("Ho ten: ");
-            fgets(hoTen[i], MAX_TEXT_LENGTH, stdin);
-            hoTen[i][strcspn(hoTen[i], "\n")] = 0;
+            fgets(danhSachDocGia[i].hoTen, MAX_TEXT_LENGTH, stdin);
+            danhSachDocGia[i].hoTen[strcspn(danhSachDocGia[i].hoTen, "\n")] = 0;
 
             printf("CMND: ");
-            fgets(cmnd[i], MAX_TEXT_LENGTH, stdin);
-            cmnd[i][strcspn(cmnd[i], "\n")] = 0;
+            fgets(danhSachDocGia[i].cmnd, MAX_TEXT_LENGTH, stdin);
+            danhSachDocGia[i].cmnd[strcspn(danhSachDocGia[i].cmnd, "\n")] = 0;
 
             printf("Ngay sinh (dd/mm/yyyy): ");
-            fgets(birth[i], MAX_DATE_LENGTH, stdin);
-            birth[i][strcspn(birth[i], "\n")] = 0;
+            fgets(danhSachDocGia[i].ngaySinh, MAX_DATE_LENGTH, stdin);
+            danhSachDocGia[i].ngaySinh[strcspn(danhSachDocGia[i].ngaySinh, "\n")] = 0;
 
             printf("Gioi tinh (Nam/Nu): ");
-            fgets(gioiTinh[i], MAX_GENDER_LENGTH, stdin);
-            gioiTinh[i][strcspn(gioiTinh[i], "\n")] = 0;
+            fgets(danhSachDocGia[i].gioiTinh, MAX_GENDER_LENGTH, stdin);
+            danhSachDocGia[i].gioiTinh[strcspn(danhSachDocGia[i].gioiTinh, "\n")] = 0;
 
             printf("Email: ");
-            fgets(email[i], MAX_TEXT_LENGTH, stdin);
-            email[i][strcspn(email[i], "\n")] = 0;
+            fgets(danhSachDocGia[i].email, MAX_TEXT_LENGTH, stdin);
+            danhSachDocGia[i].email[strcspn(danhSachDocGia[i].email, "\n")] = 0;
 
             printf("Dia chi: ");
-            fgets(diaChi[i], MAX_TEXT_LENGTH, stdin);
-            diaChi[i][strcspn(diaChi[i], "\n")] = 0;
+            fgets(danhSachDocGia[i].diaChi, MAX_TEXT_LENGTH, stdin);
+            danhSachDocGia[i].diaChi[strcspn(danhSachDocGia[i].diaChi, "\n")] = 0;
 
             nhapNgayLapThe(i);
             printf("Thong tin doc gia da duoc cap nhat.\n");
@@ -153,18 +173,18 @@ void xoaThongTinDocGia() {
     id[strcspn(id, "\n")] = 0;
 
     for (int i = 0; i < soDocGia; i++) {
-        if (strcmp(maDocGia[i], id) == 0) {
+        if (strcmp(danhSachDocGia[i].maDocGia, id) == 0) {
             // Xóa thông tin độc giả bằng cách dịch chuyển các phần tử còn lại về phía trước
             for (int j = i; j < soDocGia - 1; j++) {
-                strcpy(maDocGia[j], maDocGia[j + 1]);
-                strcpy(hoTen[j], hoTen[j + 1]);
-                strcpy(cmnd[j], cmnd[j + 1]);
-                strcpy(birth[j], birth[j + 1]);
-                strcpy(gioiTinh[j], gioiTinh[j + 1]);
-                strcpy(email[j], email[j + 1]);
-                strcpy(diaChi[j], diaChi[j + 1]);
+                strcpy(danhSachDocGia[j].maDocGia, danhSachDocGia[j + 1].maDocGia);
+                strcpy(danhSachDocGia[j].hoTen, danhSachDocGia[j + 1].hoTen);
+                strcpy(danhSachDocGia[j].cmnd, danhSachDocGia[j + 1].cmnd);
+                strcpy(danhSachDocGia[j].ngaySinh, danhSachDocGia[j + 1].ngaySinh);
+                strcpy(danhSachDocGia[j].gioiTinh, danhSachDocGia[j + 1].gioiTinh);
+                strcpy(danhSachDocGia[j].email, danhSachDocGia[j + 1].email);
+                strcpy(danhSachDocGia[j].diaChi, danhSachDocGia[j + 1].diaChi);
                 // Cập nhật ngày lập thẻ
-                strcpy(ngayLapThe[j], ngayLapThe[j + 1]);
+                strcpy(danhSachDocGia[j].ngayLapThe, danhSachDocGia[j + 1].ngayLapThe);
             }
             soDocGia--;  // Giảm số lượng độc giả
             printf("Thong tin doc gia da duoc xoa.\n");
@@ -188,17 +208,17 @@ void timKiemDocGiaTheoCMND() {
     cmndToSearch[strcspn(cmndToSearch, "\n")] = 0;
 
     for (int i = 0; i < soDocGia; i++) {
-        if (strcmp(cmnd[i], cmndToSearch) == 0) {
+        if (strcmp(danhSachDocGia[i].cmnd, cmndToSearch) == 0) {
             printf("\nThong tin doc gia:\n");
-            printf("Ma doc gia: %s\n", maDocGia[i]);
-            printf("Ho ten: %s\n", hoTen[i]);
-            printf("CMND: %s\n", cmnd[i]);
-            printf("Ngay sinh: %s\n", birth[i]);
-            printf("Gioi tinh: %s\n", gioiTinh[i]);
-            printf("Email: %s\n", email[i]);
-            printf("Dia chi: %s\n", diaChi[i]);
+            printf("Ma doc gia: %s\n", danhSachDocGia[i].maDocGia);
+            printf("Ho ten: %s\n", danhSachDocGia[i].hoTen);
+            printf("CMND: %s\n", danhSachDocGia[i].cmnd);
+            printf("Ngay sinh: %s\n", danhSachDocGia[i].ngaySinh);
+            printf("Gioi tinh: %s\n", danhSachDocGia[i].gioiTinh);
+            printf("Email: %s\n", danhSachDocGia[i].email);
+            printf("Dia chi: %s\n", danhSachDocGia[i].diaChi);
             // Hiển thị ngày lập thẻ
-            printf("Ngay lap the: %s\n", ngayLapThe[i]);
+            printf("Ngay lap the: %s\n", danhSachDocGia[i].ngayLapThe);
             found = 1;
             break;
         }
@@ -219,17 +239,17 @@ void timKiemDocGiaTheoHoTen() {
     hoTenToSearch[strcspn(hoTenToSearch, "\n")] = 0;
 
     for (int i = 0; i < soDocGia; i++) {
-        if (strstr(hoTen[i], hoTenToSearch) != NULL) {
+        if (strstr(danhSachDocGia[i].hoTen, hoTenToSearch) != NULL) {
             printf("\nThong tin doc gia:\n");
-            printf("Ma doc gia: %s\n", maDocGia[i]);
-            printf("Ho ten: %s\n", hoTen[i]);
-            printf("CMND: %s\n", cmnd[i]);
-            printf("Ngay sinh: %s\n", birth[i]);
-            printf("Gioi tinh: %s\n", gioiTinh[i]);
-            printf("Email: %s\n", email[i]);
-            printf("Dia chi: %s\n", diaChi[i]);
+            printf("Ma doc gia: %s\n", danhSachDocGia[i].maDocGia);
+            printf("Ho ten: %s\n", danhSachDocGia[i].hoTen);
+            printf("CMND: %s\n", danhSachDocGia[i].cmnd);
+            printf("Ngay sinh: %s\n", danhSachDocGia[i].ngaySinh);
+            printf("Gioi tinh: %s\n", danhSachDocGia[i].gioiTinh);
+            printf("Email: %s\n", danhSachDocGia[i].email);
+            printf("Dia chi: %s\n", danhSachDocGia[i].diaChi);
             // Hiển thị ngày lập thẻ
-            printf("Ngay lap the: %s\n", ngayLapThe[i]);
+            printf("Ngay lap the: %s\n", danhSachDocGia[i].ngayLapThe);
             found = 1;
         }
     }
@@ -272,12 +292,15 @@ void quanLyDocGia() {
             break;
             case 'b': printf("|  Ban dang: Them doc gia  |");
             themDocGia();
+                GhiTapTin(danhSachDocGia, soDocGia);
             break;
             case 'c': printf("|  Ban dang: Chinh sua thong tin doc gia  |");
             suaThongTinDocGia();
+                GhiTapTin(danhSachDocGia, soDocGia);
             break;
             case 'd': printf("|  Ban dang: Xoa thong tin doc gia  |");
             xoaThongTinDocGia();
+                GhiTapTin(danhSachDocGia, soDocGia);
             break;
             case 'e': printf("|  Ban dang: Tim kiem doc gia theo CMND  |");
             timKiemDocGiaTheoCMND();

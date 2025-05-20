@@ -1,7 +1,8 @@
 # Bỏ qua node_modules
 node_modules/
 .idea/
-cmake-build-debug/
+cmake-build-*/
+
 
 # Bao gồm các file khác, ví dụ .csv và .txt, ...
 *.csv
@@ -22,3 +23,5 @@ cmake-build-debug/
 *.mp4
 *.names
 *.exe
+*.o
+*.obj

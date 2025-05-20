@@ -2,16 +2,7 @@
 #include <string.h>
 #include "phieuMuonSach.h"
 
-#define MAX_SACH 100
-#define MAX_PHIEUMUON 100
-#define MAX_STRING 50
-
-// Các mảng 1 chiều cần có:
-int maPhieuMuon[MAX_PHIEUMUON];
-char maDocGiaPhieuMuon[MAX_PHIEUMUON][50];
-char isbnPhieuMuon[MAX_PHIEUMUON][50];
-char ngayMuon[MAX_PHIEUMUON][50];
-char ngayTraDuKien[MAX_PHIEUMUON][50];
+phieuMuon danhSachPMuon[MAX_PHIEUMUON];
 
 int soPhieuMuon = 0; //Số phiếu mượn ban đầu
 
@@ -43,9 +34,9 @@ void nhapMuonSach() {
         // Nhập mã độc giả
         while (1) {
             printf("Ma doc gia: ");
-            fgets(maDocGiaPhieuMuon[i], sizeof(maDocGiaPhieuMuon[i]), stdin);
-            maDocGiaPhieuMuon[i][strcspn(maDocGiaPhieuMuon[i], "\n")] = '\0';
-            if (tonTaiMaDocGia(maDocGiaPhieuMuon[i])) {
+            fgets(danhSachPMuon[i].maDocGiaPhieuMuon, sizeof(danhSachPMuon[i].maDocGiaPhieuMuon), stdin);
+            danhSachPMuon[i].maDocGiaPhieuMuon[strcspn(danhSachPMuon[i].maDocGiaPhieuMuon, "\n")] = '\0';
+            if (tonTaiMaDocGia(danhSachPMuon[i].maDocGiaPhieuMuon)) {
                 break;
             } else {
                 printf("[X] Ma doc gia khong ton tai! Nhap lai.\n");
@@ -55,9 +46,9 @@ void nhapMuonSach() {
         // Nhập ISBN
         while (1) {
             printf("ISBN: ");
-            fgets(isbnPhieuMuon[i], sizeof(isbnPhieuMuon[i]), stdin);
-            isbnPhieuMuon[i][strcspn(isbnPhieuMuon[i], "\n")] = '\0';
-            if (tonTaiMaSach(isbnPhieuMuon[i])) {
+            fgets(danhSachPMuon[i].isbnPhieuMuon, sizeof(danhSachPMuon[i].isbnPhieuMuon), stdin);
+            danhSachPMuon[i].isbnPhieuMuon[strcspn(danhSachPMuon[i].isbnPhieuMuon, "\n")] = '\0';
+            if (tonTaiMaSach(danhSachPMuon[i].isbnPhieuMuon)) {
                 break;
             } else {
                 printf("[X] ISBN khong ton tai! Vui long nhap lai.\n");
@@ -66,15 +57,15 @@ void nhapMuonSach() {
 
         // Nhập ngày mượn
         printf("Ngay muon: ");
-        fgets(ngayMuon[i], sizeof(ngayMuon[i]), stdin);
-        ngayMuon[i][strcspn(ngayMuon[i], "\n")] = '\0';
+        fgets(danhSachPMuon[i].ngayMuon, sizeof(danhSachPMuon[i].ngayMuon), stdin);
+        danhSachPMuon[i].ngayMuon[strcspn(danhSachPMuon[i].ngayMuon, "\n")] = '\0';
 
         // Tính ngày trả dự kiến
-        cong7Ngay(ngayMuon[i], ngayTraDuKien[i]);
-        printf("Ngay tra du kien: %s\n", ngayTraDuKien[i]);
+        cong7Ngay(danhSachPMuon[i].ngayMuon, danhSachPMuon[i].ngayTraDuKien);
+        printf("Ngay tra du kien: %s\n", danhSachPMuon[i].ngayTraDuKien);
 
-        maPhieuMuon[i] += i ;
-        capNhatSauMuon(isbnPhieuMuon[i]);
+        danhSachPMuon[i].maPhieuMuon += i ;
+        capNhatSauMuon(danhSachPMuon[i].isbnPhieuMuon);
     }
     soPhieuMuon += soPhieuMoi;
 }
@@ -86,6 +77,7 @@ void xuatMuonSach() {
 
     for (int i = 0; i < soPhieuMuon; i++) {
         printf("%-15d | %-15s | %-20s | %-15s | %-15s\n",
-            maPhieuMuon[i],maDocGiaPhieuMuon[i], isbnPhieuMuon[i], ngayMuon[i], ngayTraDuKien[i]);
+            danhSachPMuon[i].maPhieuMuon, danhSachPMuon[i].maDocGiaPhieuMuon, danhSachPMuon[i].isbnPhieuMuon,
+            danhSachPMuon[i].ngayMuon, danhSachPMuon[i].ngayTraDuKien);
     }
 }

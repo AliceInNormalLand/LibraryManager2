@@ -8,10 +8,10 @@
 #include "docGia.h"
 
 void menuThongKe();
-int thongKeSachTV(char dsSach[][8][50], int soSach);
-void thongKeLoaiSach(char dsSach[][8][50], int soSach);
-int thongKeDocGia(char dsPhieuMuon[][4][50], int soPhieuMuon, int soDocGia);
-void thongKeGioiTinh(char gioiTinh[][10], int soDocGia);
+int thongKeSachTV(sach danhSachSach[], int soSach);
+void thongKeLoaiSach(sach danhSachSach[], int soSach);
+void thongKeDocGia(phieuMuon danhSachPMuon, int soPhieuMuon, int tongDocGia);
+void thongKeGioiTinh(docGia danhSachDocGia[], int soDocGia);
 void thongKeSachMuon(int soPhieuMuon, int soPhieuTra);
 int thongKeTreHan(int soPhieuTra);
 void thongKeCoBan();

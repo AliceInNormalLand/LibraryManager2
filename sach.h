@@ -5,20 +5,12 @@
 #include <string.h>
 #include "hamExtra.h"
 
-#define MAX_TEXT_LENGTH 50
+#define MAX_TEXTS_LENGTH 50
 #define MAX_SACH 100
 
 //Khai báo biến toàn cục
 extern int soSach;
-extern char ISBN[MAX_SACH][MAX_TEXT_LENGTH];
-extern char ISBN[MAX_SACH][MAX_TEXT_LENGTH];
-extern char tenSach[MAX_SACH][MAX_TEXT_LENGTH];
-extern char tacGia[MAX_SACH][MAX_TEXT_LENGTH];
-extern char nhaXuatBan[MAX_SACH][MAX_TEXT_LENGTH];
-extern char namXuatBan[MAX_SACH][MAX_TEXT_LENGTH];
-extern char theLoai[MAX_SACH][MAX_TEXT_LENGTH];
-extern char giaSach[MAX_SACH][MAX_TEXT_LENGTH];
-extern char soLuong[MAX_SACH][MAX_TEXT_LENGTH];
+extern struct sach danhSachSach[MAX_SACH];
 
 //Khai báo tên hàm
 void xemDanhSachSach();
@@ -29,4 +21,16 @@ void chinhSuaSach();
 void xoaSach();
 void menuSach();
 void quanLySach();
+
+//Moi nhat
+struct sach {
+    char ISBN[MAX_TEXTS_LENGTH];
+    char tenSach[MAX_TEXTS_LENGTH];
+    char tacGia[MAX_TEXTS_LENGTH];
+    char nhaXuatBan[MAX_TEXTS_LENGTH];
+    char namXuatBan[MAX_TEXTS_LENGTH];
+    char theLoai[MAX_TEXTS_LENGTH];
+    char giaSach[MAX_TEXTS_LENGTH];
+    char soLuong[MAX_TEXTS_LENGTH];
+};
 

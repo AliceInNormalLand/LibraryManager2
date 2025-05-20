@@ -6,13 +6,20 @@
 #include "sach.h"
 #include "hamExtra.h"
 
+#define MAX_SACH 100
 #define MAX_PHIEUMUON 100
+#define MAX_STRING 50
 
-extern int maPhieuMuon[MAX_PHIEUMUON];
 extern int soPhieuMuon;
-extern char ngayMuon[MAX_PHIEUMUON][50];
-extern char maDocGiaPhieuMuon[MAX_PHIEUMUON][50];
-extern char isbnPhieuMuon[MAX_PHIEUMUON][50];
+extern struct phieuMuon danhSachPMuon[MAX_PHIEUMUON];
 
 void nhapMuonSach();
 void xuatMuonSach();
+
+struct phieuMuon {
+    int maPhieuMuon;
+    char maDocGiaPhieuMuon[50];
+    char isbnPhieuMuon[50];
+    char ngayMuon[50];
+    char ngayTraDuKien[50];
+};

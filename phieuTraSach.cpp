@@ -2,17 +2,7 @@
 #include <string.h>
 #include "phieuTraSach.h"
 
-#define MAX_PHIEUTRA 100
-#define MAX_STRING 50
-
-int maPhieuTra[MAX_PHIEUTRA];
-char maDocGiaPhieuTra[MAX_PHIEUTRA][MAX_STRING];
-char isbnPhieuTra[MAX_PHIEUTRA][MAX_STRING];
-char ngayMuonPhieuTra[MAX_PHIEUTRA][MAX_STRING];
-char ngayTraDuKienPhieuTra[MAX_PHIEUTRA][MAX_STRING];
-char ngayTraThucTePhieuTra[MAX_PHIEUTRA][MAX_STRING];
-char tinhTrangPhieuTra[MAX_PHIEUTRA][MAX_STRING];
-int tienPhatPhieuTra[MAX_PHIEUTRA];
+phieuTra danhSachPTra[MAX_PHIEUTRA];
 
 int soPhieuTra = 0;
 
@@ -42,14 +32,13 @@ void nhapTraSach() {
         // Mã độc giả + ISBN
         while (1) {
             printf("Ma phieu muon: ");
-            // fgets(maPhieuTra[i], MAX_STRING, stdin);
 
             int daTonTaiTrongMang = 0;
 
-            scanf_s("%d", &maPhieuTra[i]);
+            scanf_s("%d", danhSachPTra[i].maPhieuTra);
             for (int j = 0; j < soPhieuTra; j++) {
                 for (int k = 0; k < soPhieuTra; k++) {
-                    if (maPhieuTra[i] == maPhieuTra[j]) {
+                    if (danhSachPTra[i].maPhieuTra == danhSachPTra[j].maPhieuTra) {
                         daTonTaiTrongMang = 1;
                         break;
                     }
@@ -60,10 +49,10 @@ void nhapTraSach() {
             }else {
                 int daTonTai = 0;
                 for (int j = 0; j < soPhieuMuon; j++) {
-                    if (maPhieuTra[i] == maPhieuMuon[j]) {
-                        strcpy(maDocGiaPhieuTra[i], maDocGiaPhieuMuon[j]);
-                        strcpy(isbnPhieuTra[i], isbnPhieuMuon[j]);
-                        strcpy(ngayMuonPhieuTra[i], ngayMuon[j]);
+                    if (danhSachPTra[i].maPhieuTra == danhSachPMuon[j].maPhieuMuon) {
+                        strcpy(danhSachPTra[i].maDocGiaPhieuTra, danhSachPMuon[j].maDocGiaPhieuMuon);
+                        strcpy(danhSachPTra[i].isbnPhieuTra, danhSachPMuon[j].isbnPhieuMuon);
+                        strcpy(danhSachPTra[i].ngayMuonPhieuTra, danhSachPMuon[j].ngayMuon);
                         daTonTai = 1;
                         break;
                     }
@@ -76,31 +65,31 @@ void nhapTraSach() {
         }
         while (getchar() != '\n');
         // Tính ngày trả dự kiến
-        cong7Ngay(ngayMuonPhieuTra[i], ngayTraDuKienPhieuTra[i]);
-        printf("=> Ngay tra du kien: %s\n", ngayTraDuKienPhieuTra[i]);
+        cong7Ngay(danhSachPTra[i].ngayMuonPhieuTra, danhSachPTra[i].ngayTraDuKienPhieuTra);
+        printf("=> Ngay tra du kien: %s\n", danhSachPTra[i].ngayTraDuKienPhieuTra);
 
         // Ngày trả thực tế
         printf("Ngay tra thuc te (dd/mm/yyyy): ");
-        fgets(ngayTraThucTePhieuTra[i], MAX_STRING, stdin);
-        ngayTraThucTePhieuTra[i][strcspn(ngayTraThucTePhieuTra[i], "\n")] = '\0';
+        fgets(danhSachPTra[i].ngayTraThucTePhieuTra, MAX_STRING, stdin);
+        danhSachPTra[i].ngayTraThucTePhieuTra[strcspn(danhSachPTra[i].ngayTraThucTePhieuTra, "\n")] = '\0';
 
         // Tình trạng
         printf("Tinh trang (qua han / da tra / mat): ");
-        fgets(tinhTrangPhieuTra[i], MAX_STRING, stdin);
-        tinhTrangPhieuTra[i][strcspn(tinhTrangPhieuTra[i], "\n")] = '\0';
+        fgets(danhSachPTra[i].tinhTrangPhieuTra, MAX_STRING, stdin);
+        danhSachPTra[i].tinhTrangPhieuTra[strcspn(danhSachPTra[i].tinhTrangPhieuTra, "\n")] = '\0';
 
         // Tiền phạt
-        tienPhatPhieuTra[i] = 0;
-        if (strcmp(tinhTrangPhieuTra[i], "mat") == 0) {
-            tienPhatPhieuTra[i] = tinhTienPhatMatSach(isbnPhieuTra[i]) ; // Mất sách, phạt 200%
+        danhSachPTra[i].tienPhatPhieuTra = 0;
+        if (strcmp(danhSachPTra[i].tinhTrangPhieuTra, "mat") == 0) {
+            danhSachPTra[i].tienPhatPhieuTra = tinhTienPhatMatSach(danhSachPTra[i].isbnPhieuTra) ; // Mất sách, phạt 200%
         }
-        else if (strcmp(tinhTrangPhieuTra[i], "qua han") == 0) {
-            tienPhatPhieuTra[i] = tinhTienPhat(ngayMuonPhieuTra[i], ngayTraThucTePhieuTra[i]);
+        else if (strcmp(danhSachPTra[i].tinhTrangPhieuTra, "qua han") == 0) {
+            danhSachPTra[i].tienPhatPhieuTra = tinhTienPhat(danhSachPTra[i].ngayMuonPhieuTra, danhSachPTra[i].ngayTraThucTePhieuTra);
         }
 
-        printf("Tien phat: %d\n", tienPhatPhieuTra[i]);
+        printf("Tien phat: %d\n", danhSachPTra[i].tienPhatPhieuTra);
 
-        capNhatSauTra(isbnPhieuTra[i]);
+        capNhatSauTra(danhSachPTra[i].isbnPhieuTra);
     }
     soPhieuTra += soPhieuMoi;
 }
@@ -119,14 +108,14 @@ void xuatTraSach() {
 
     for (int i = 0; i < soPhieuTra; i++) {
         printf("%-15d %-15s %-15s %-15s %-20s %-20s %-20s %-10d\n",
-               maPhieuTra[i],
-               maDocGiaPhieuTra[i],
-               isbnPhieuTra[i],
-               ngayMuonPhieuTra[i],
-               ngayTraDuKienPhieuTra[i],
-               ngayTraThucTePhieuTra[i],
-               tinhTrangPhieuTra[i],
-               tienPhatPhieuTra[i]);
+               danhSachPTra[i].maPhieuTra,
+               danhSachPTra[i].maDocGiaPhieuTra,
+               danhSachPTra[i].isbnPhieuTra,
+               danhSachPTra[i].ngayMuonPhieuTra,
+               danhSachPTra[i].ngayTraDuKienPhieuTra,
+               danhSachPTra[i].ngayTraThucTePhieuTra,
+               danhSachPTra[i].tinhTrangPhieuTra,
+               danhSachPTra[i].tienPhatPhieuTra);
     }
 }
 

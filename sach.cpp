@@ -2,34 +2,29 @@
 #include <string.h>
 #include "sach.h"
 
-#define MAX_SACH 100
-#define MAX_TEXT_LENGTH 50
-
 // Danh sách sách demo
-char ISBN[MAX_SACH][MAX_TEXT_LENGTH] = {"S001", "S002", "S003"};
-char tenSach[MAX_SACH][MAX_TEXT_LENGTH] = {"Hoang tu be", "Nha gia kim", "Lap trinh C/C++"};
-char tacGia[MAX_SACH][MAX_TEXT_LENGTH] = {"Saint Exupery", "Paulo Coelho", "Nguyen Van C"};
-char nhaXuatBan[MAX_SACH][MAX_TEXT_LENGTH] = {"NXB Giao Duc", "NXB Tre", "NXB Lao Dong"};
-char namXuatBan[MAX_SACH][MAX_TEXT_LENGTH] = {"2022", "2021", "2023"};
-char theLoai[MAX_SACH][MAX_TEXT_LENGTH] = {"Van hoc Phap", "Triet hoc", "Triet hoc"};
-char giaSach[MAX_SACH][MAX_TEXT_LENGTH] = {"75000", "85000", "95000"};
-char soLuong[MAX_SACH][MAX_TEXT_LENGTH] = {"10", "8", "5"};
+sach danhSachSach[MAX_SACH] = {
+    {"S001", "Hoang tu be", "Saint Exupery", "NXB Giao Duc", "2022", "Van hoc Phap", "75000", "10"},
+    {"S002", "Nha gia kim", "Paulo Coelho", "NXB Tre", "2021", "Triet hoc", "85000", "8"},
+    {"S003", "Lap trinh C/C++", "Nguyen Van C", "NXB Lao Dong", "2023", "Triet hoc", "95000", "5"}
+};
 
 int soSach = 3; // Đang có 3 sách
+
 
 // Hàm hiển thị danh sách sách
 void xemDanhSachSach() {
     printf("\n===== DANH SACH SACH =====\n");
     for (int i = 0; i < soSach; i++) {
         printf("Sach %d:\n", i + 1);
-        printf("ISBN: %s\n", ISBN[i]);
-        printf("Ten sach: %s\n", tenSach[i]);
-        printf("Tac gia: %s\n", tacGia[i]);
-        printf("Nha xuat ban: %s\n", nhaXuatBan[i]);
-        printf("Nam xuat ban: %s\n", namXuatBan[i]);
-        printf("The loai: %s\n", theLoai[i]);
-        printf("Gia sach: %s\n", giaSach[i]);
-        printf("So luong: %s\n\n", soLuong[i]);
+        printf("ISBN: %s\n", danhSachSach[i].ISBN);
+        printf("Ten sach: %s\n", danhSachSach[i].tenSach);
+        printf("Tac gia: %s\n", danhSachSach[i].tacGia);
+        printf("Nha xuat ban: %s\n", danhSachSach[i].nhaXuatBan);
+        printf("Nam xuat ban: %s\n", danhSachSach[i].namXuatBan);
+        printf("The loai: %s\n", danhSachSach[i].theLoai);
+        printf("Gia sach: %s\n", danhSachSach[i].giaSach);
+        printf("So luong: %s\n\n", danhSachSach[i].soLuong);
     }
 }
 
@@ -59,35 +54,35 @@ void themSach() {
             printf("ISBN da ton tai! Vui long nhap lai.\n");
             continue;
         }
-        strcpy(ISBN[i], isbnTam);
+        strcpy(danhSachSach[i].ISBN, isbnTam);
 
         printf("Nhap ten sach: ");
-        fgets(tenSach[i], MAX_TEXT_LENGTH, stdin);
-        tenSach[i][strcspn(tenSach[i], "\n")] = 0;
+        fgets(danhSachSach[i].tenSach, MAX_TEXT_LENGTH, stdin);
+        danhSachSach[i].tenSach[strcspn(danhSachSach[i].tenSach, "\n")] = 0;
 
         printf("Nhap tac gia: ");
-        fgets(tacGia[i], MAX_TEXT_LENGTH, stdin);
-        tacGia[i][strcspn(tacGia[i], "\n")] = 0;
+        fgets(danhSachSach[i].tacGia, MAX_TEXT_LENGTH, stdin);
+        danhSachSach[i].tacGia[strcspn(danhSachSach[i].tacGia, "\n")] = 0;
 
         printf("Nhap nha xuat ban: ");
-        fgets(nhaXuatBan[i], MAX_TEXT_LENGTH, stdin);
-        nhaXuatBan[i][strcspn(nhaXuatBan[i], "\n")] = 0;
+        fgets(danhSachSach[i].nhaXuatBan, MAX_TEXT_LENGTH, stdin);
+        danhSachSach[i].nhaXuatBan[strcspn(danhSachSach[i].nhaXuatBan, "\n")] = 0;
 
         printf("Nhap nam xuat ban: ");
-        fgets(namXuatBan[i], MAX_TEXT_LENGTH, stdin);
-        namXuatBan[i][strcspn(namXuatBan[i], "\n")] = 0;
+        fgets(danhSachSach[i].namXuatBan, MAX_TEXT_LENGTH, stdin);
+        danhSachSach[i].namXuatBan[strcspn(danhSachSach[i].namXuatBan, "\n")] = 0;
 
         printf("Nhap the loai: ");
-        fgets(theLoai[i], MAX_TEXT_LENGTH, stdin);
-        theLoai[i][strcspn(theLoai[i], "\n")] = 0;
+        fgets(danhSachSach[i].theLoai, MAX_TEXT_LENGTH, stdin);
+        danhSachSach[i].theLoai[strcspn(danhSachSach[i].theLoai, "\n")] = 0;
 
         printf("Nhap gia sach: ");
-        fgets(giaSach[i], MAX_TEXT_LENGTH, stdin);
-        giaSach[i][strcspn(giaSach[i], "\n")] = 0;
+        fgets(danhSachSach[i].giaSach, MAX_TEXT_LENGTH, stdin);
+        danhSachSach[i].giaSach[strcspn(danhSachSach[i].giaSach, "\n")] = 0;
 
         printf("Nhap so luong: ");
-        fgets(soLuong[i], MAX_TEXT_LENGTH, stdin);
-        soLuong[i][strcspn(soLuong[i], "\n")] = 0;
+        fgets(danhSachSach[i].soLuong, MAX_TEXT_LENGTH, stdin);
+        danhSachSach[i].soLuong[strcspn(danhSachSach[i].soLuong, "\n")] = 0;
 
         i++;
     }
@@ -107,15 +102,15 @@ void timKiemISBN() {
 
     int found = 0;
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ISBN[i], isbn) == 0) {
+        if (strcmp(danhSachSach[i].ISBN, isbn) == 0) {
             printf("Tim thay sach:\n");
-            printf("Ten sach: %s\n", tenSach[i]);
-            printf("Tac gia: %s\n", tacGia[i]);
-            printf("Nha xuat ban: %s\n", nhaXuatBan[i]);
-            printf("Nam xuat ban: %s\n", namXuatBan[i]);
-            printf("The loai: %s\n", theLoai[i]);
-            printf("Gia sach: %s\n", giaSach[i]);
-            printf("So luong: %s\n", soLuong[i]);
+            printf("Ten sach: %s\n", danhSachSach[i].tenSach);
+            printf("Tac gia: %s\n", danhSachSach[i].tacGia);
+            printf("Nha xuat ban: %s\n", danhSachSach[i].nhaXuatBan);
+            printf("Nam xuat ban: %s\n", danhSachSach[i].namXuatBan);
+            printf("The loai: %s\n", danhSachSach[i].theLoai);
+            printf("Gia sach: %s\n", danhSachSach[i].giaSach);
+            printf("So luong: %s\n", danhSachSach[i].soLuong);
             found = 1;
             break;
         }
@@ -134,15 +129,15 @@ void timKiemTen() {
 
     int found = 0;
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(tenSach[i], ten) == 0) {
+        if (strcmp(danhSachSach[i].tenSach, ten) == 0) {
             printf("Tim thay sach:\n");
-            printf("ISBN: %s\n", ISBN[i]);
-            printf("Tac gia: %s\n", tacGia[i]);
-            printf("Nha xuat ban: %s\n", nhaXuatBan[i]);
-            printf("Nam xuat ban: %s\n", namXuatBan[i]);
-            printf("The loai: %s\n", theLoai[i]);
-            printf("Gia sach: %s\n", giaSach[i]);
-            printf("So luong: %s\n", soLuong[i]);
+            printf("ISBN: %s\n", danhSachSach[i].ISBN);
+            printf("Tac gia: %s\n", danhSachSach[i].tacGia);
+            printf("Nha xuat ban: %s\n", danhSachSach[i].nhaXuatBan);
+            printf("Nam xuat ban: %s\n", danhSachSach[i].namXuatBan);
+            printf("The loai: %s\n", danhSachSach[i].theLoai);
+            printf("Gia sach: %s\n", danhSachSach[i].giaSach);
+            printf("So luong: %s\n", danhSachSach[i].soLuong);
             found = 1;
         }
     }
@@ -161,34 +156,34 @@ void chinhSuaSach() {
 
     int found = 0;
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ISBN[i], isbn) == 0) {
+        if (strcmp(danhSachSach[i].ISBN, isbn) == 0) {
             printf("Nhap lai ten sach: ");
-            fgets(tenSach[i], MAX_TEXT_LENGTH, stdin);
-            tenSach[i][strcspn(tenSach[i], "\n")] = 0;
+            fgets(danhSachSach[i].tenSach, MAX_TEXT_LENGTH, stdin);
+            danhSachSach[i].tenSach[strcspn(danhSachSach[i].tenSach, "\n")] = 0;
 
             printf("Nhap lai tac gia: ");
-            fgets(tacGia[i], MAX_TEXT_LENGTH, stdin);
-            tacGia[i][strcspn(tacGia[i], "\n")] = 0;
+            fgets(danhSachSach[i].tacGia, MAX_TEXT_LENGTH, stdin);
+            danhSachSach[i].tacGia[strcspn(danhSachSach[i].tacGia, "\n")] = 0;
 
             printf("Nhap lai nha xuat ban: ");
-            fgets(nhaXuatBan[i], MAX_TEXT_LENGTH, stdin);
-            nhaXuatBan[i][strcspn(nhaXuatBan[i], "\n")] = 0;
+            fgets(danhSachSach[i].nhaXuatBan, MAX_TEXT_LENGTH, stdin);
+            danhSachSach[i].nhaXuatBan[strcspn(danhSachSach[i].nhaXuatBan, "\n")] = 0;
 
             printf("Nhap lai nam xuat ban: ");
-            fgets(namXuatBan[i], MAX_TEXT_LENGTH, stdin);
-            namXuatBan[i][strcspn(namXuatBan[i], "\n")] = 0;
+            fgets(danhSachSach[i].namXuatBan, MAX_TEXT_LENGTH, stdin);
+            danhSachSach[i].namXuatBan[strcspn(danhSachSach[i].namXuatBan, "\n")] = 0;
 
             printf("Nhap lai the loai: ");
-            fgets(theLoai[i], MAX_TEXT_LENGTH, stdin);
-            theLoai[i][strcspn(theLoai[i], "\n")] = 0;
+            fgets(danhSachSach[i].theLoai, MAX_TEXT_LENGTH, stdin);
+            danhSachSach[i].theLoai[strcspn(danhSachSach[i].theLoai, "\n")] = 0;
 
             printf("Nhap lai gia sach: ");
-            fgets(giaSach[i], MAX_TEXT_LENGTH, stdin);
-            giaSach[i][strcspn(giaSach[i], "\n")] = 0;
+            fgets(danhSachSach[i].giaSach, MAX_TEXT_LENGTH, stdin);
+            danhSachSach[i].giaSach[strcspn(danhSachSach[i].giaSach, "\n")] = 0;
 
             printf("Nhap lai so luong: ");
-            fgets(soLuong[i], MAX_TEXT_LENGTH, stdin);
-            soLuong[i][strcspn(soLuong[i], "\n")] = 0;
+            fgets(danhSachSach[i].soLuong, MAX_TEXT_LENGTH, stdin);
+            danhSachSach[i].soLuong[strcspn(danhSachSach[i].soLuong, "\n")] = 0;
 
             printf("Sua thanh cong!\n");
             found = 1;
@@ -210,16 +205,16 @@ void xoaSach() {
 
     int found = 0;
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ISBN[i], isbn) == 0) {
+        if (strcmp(danhSachSach[i].ISBN, isbn) == 0) {
             for (int j = i; j < soSach - 1; j++) {
-                strcpy(ISBN[j], ISBN[j + 1]);
-                strcpy(tenSach[j], tenSach[j + 1]);
-                strcpy(tacGia[j], tacGia[j + 1]);
-                strcpy(nhaXuatBan[j], nhaXuatBan[j + 1]);
-                strcpy(namXuatBan[j], namXuatBan[j + 1]);
-                strcpy(theLoai[j], theLoai[j + 1]);
-                strcpy(giaSach[j], giaSach[j + 1]);
-                strcpy(soLuong[j], soLuong[j + 1]);
+                strcpy(danhSachSach[j].ISBN, danhSachSach[j + 1].ISBN);
+                strcpy(danhSachSach[j].tenSach, danhSachSach[j + 1].tenSach);
+                strcpy(danhSachSach[j].tacGia, danhSachSach[j + 1].tacGia);
+                strcpy(danhSachSach[j].nhaXuatBan, danhSachSach[j + 1].nhaXuatBan);
+                strcpy(danhSachSach[j].namXuatBan, danhSachSach[j + 1].namXuatBan);
+                strcpy(danhSachSach[j].theLoai, danhSachSach[j + 1].theLoai);
+                strcpy(danhSachSach[j].giaSach, danhSachSach[j + 1].giaSach);
+                strcpy(danhSachSach[j].soLuong, danhSachSach[j + 1].soLuong);
             }
             soSach--;
             printf("Xoa sach thanh cong!\n");
@@ -282,7 +277,6 @@ void quanLySach() {
             break;
             case 'g': printf("|  TRO LAI MENU  |\n");
             return;
-            //break;
             default:
                 printf("Lua chon khong hop le\n");
             break;

@@ -50,8 +50,8 @@ int tinhTienPhat(char ngayMuon[], char ngayTraThucTe[]) {
 int tinhTienPhatMatSach(char maSachNhap[]) {
     int tienPhat = 0;
     for (int i = 0; i < soSach ; i++) {
-        if (strcmp(maSachNhap, ISBN[i]) == 0) {
-            tienPhat = atoi(giaSach[i]) * 2;
+        if (strcmp(maSachNhap,  danhSachSach[i].ISBN) == 0) {
+            tienPhat = atoi(danhSachSach[i].giaSach) * 2;
             break;
         }
     }
@@ -90,10 +90,10 @@ void cong7Ngay(char ngayMuon[], char ngayTraDuKien[]) {
 // Đầu ra là số lượng sách của đầu sách tương ứng cộng 1
 void capNhatSauMuon(char maSachTV[]) {
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ISBN[i], maSachTV) == 0) {
-            int soLuongSach = atoi(soLuong[i]);
+        if (strcmp(danhSachSach[i].ISBN, maSachTV) == 0) {
+            int soLuongSach = atoi(danhSachSach[i].soLuong);
             soLuongSach -= 1;
-            sprintf(soLuong[i], "%d", soLuongSach); // chuyển thẳng số thành chuỗi
+            sprintf(danhSachSach[i].soLuong, "%d", soLuongSach); // chuyển thẳng số thành chuỗi
         }
     }
 }
@@ -103,10 +103,10 @@ void capNhatSauMuon(char maSachTV[]) {
 // Đầu ra là số lượng sách trừ 1
 void capNhatSauTra(char maSachTV[]) {
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ISBN[i], maSachTV) == 0) {
-            int soLuongSach = atoi(soLuong[i]);
+        if (strcmp(danhSachSach[i].ISBN, maSachTV) == 0) {
+            int soLuongSach = atoi(danhSachSach[i].soLuong);
             soLuongSach += 1;
-            sprintf(soLuong[i], "%d", soLuongSach); // chuyển thẳng số thành chuỗi
+            sprintf(danhSachSach[i].soLuong, "%d", soLuongSach); // chuyển thẳng số thành chuỗi
         }
     }
 }
@@ -116,7 +116,7 @@ void capNhatSauTra(char maSachTV[]) {
 // Đầu ra là: nếu giống với mã độc giả trong danh sách độc giả thì trả về 1 ngược lại trả về 0
 int tonTaiMaDocGia(char maDocGiaNhap[]) {
     for (int i = 0; i < soDocGia; i++) {
-        if (strcmp(maDocGia[i], maDocGiaNhap) == 0) {
+        if (strcmp(danhSachDocGia[i].maDocGia, maDocGiaNhap) == 0) {
             return 1; // Mã độc giả đã tồn tại
         }
     }
@@ -128,7 +128,7 @@ int tonTaiMaDocGia(char maDocGiaNhap[]) {
 // Đầu ra là: nếu giống với mã sách trong danh sách sách thì trả về 1 ngược lại trả về 0
 int tonTaiMaSach(char maSachNhap[]) {
     for (int i = 0; i < soSach; i++) {
-        if (strcmp(ISBN[i], maSachNhap) == 0) {
+        if (strcmp(danhSachSach[i].ISBN, maSachNhap) == 0) {
             return 1;
         }
     }
@@ -147,12 +147,12 @@ void nhapNgayLapThe(int index) {
     while (getchar() != '\n'); // Xóa bỏ ký tự thừa
 
     // Lưu lại ngày lập thẻ theo định dạng dd/mm/yyyy (không xài print vì print chỉ in ra, không lưu lại)
-    sprintf(ngayLapThe[index], "%02d/%02d/%04d", d, m, y);
+    sprintf(danhSachDocGia[index].ngayLapThe, "%02d/%02d/%04d", d, m, y);
 
     // Cộng thêm 48 tháng
     m += 48;
     y += (m - 1) / 12;
     m = (m - 1) % 12 + 1;
 
-    sprintf(ngayHetHan[index], "%02d/%02d/%04d", d, m, y);
+    sprintf(danhSachDocGia[index].ngayHetHan, "%02d/%02d/%04d", d, m, y);
 }
