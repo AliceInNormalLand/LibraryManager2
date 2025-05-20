@@ -29,6 +29,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="561b42d4-34bc-4060-83e3-d28faec1fd30" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
@@ -179,7 +180,7 @@
       <workItem from="1747541595081" duration="9044000" />
       <workItem from="1747557453658" duration="4821000" />
       <workItem from="1747670700759" duration="6074000" />
-      <workItem from="1747739653472" duration="5643000" />
+      <workItem from="1747739653472" duration="6203000" />
     </task>
     <servers />
   </component>
