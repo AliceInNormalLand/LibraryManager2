@@ -13,13 +13,15 @@ extern int soSach;
 extern struct sach danhSachSach[MAX_SACH];
 
 //Khai báo tên hàm
+void menuSach();
+void GhiTapTinSach(sach danhSachSach[], int soSach);
+void DocMangTuTapTinSach(sach danhSachSach[], int& n);
 void xemDanhSachSach();
 void themSach();
 void timKiemISBN();
 void timKiemTen();
 void chinhSuaSach();
 void xoaSach();
-void menuSach();
 void quanLySach();
 
 //Moi nhat

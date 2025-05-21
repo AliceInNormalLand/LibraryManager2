@@ -1,8 +1,6 @@
 #pragma once
 #include "hamExtra.h"
 
-
-
 #define MAX_USERS 100
 #define MAX_TEXT_LENGTH 100
 #define MAX_DOC_GIA_ID_LENGTH 20
@@ -14,16 +12,15 @@ extern int soDocGia;
 extern struct docGia danhSachDocGia[MAX_USERS];
 
 //Khai báo tên hàm
+void menuDocGia();
+void DocMangTuTapTinDocGia(docGia danhSachDocGia[], int& n);
+void GhiTapTinDocGia(docGia danhSachDocGia[], int slDocGia);
 void themDocGia();
 void xuatDanhSach();
 void suaThongTinDocGia();
 void xoaThongTinDocGia();
 void timKiemDocGiaTheoCMND();
 void timKiemDocGiaTheoHoTen();
-
-void GhiTapTin(docGia danhSachDocGia[], int slDocGia);
-
-void menuDocGia();
 void quanLyDocGia();
 
 

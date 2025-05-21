@@ -2,15 +2,120 @@
 #include <string.h>
 #include "sach.h"
 
-// Danh sách sách demo
-sach danhSachSach[MAX_SACH] = {
-    {"S001", "Hoang tu be", "Saint Exupery", "NXB Giao Duc", "2022", "Van hoc Phap", "75000", "10"},
-    {"S002", "Nha gia kim", "Paulo Coelho", "NXB Tre", "2021", "Triet hoc", "85000", "8"},
-    {"S003", "Lap trinh C/C++", "Nguyen Van C", "NXB Lao Dong", "2023", "Triet hoc", "95000", "5"}
-};
+int soSach = 0; // Đang có 0 sách
 
-int soSach = 3; // Đang có 3 sách
+// Hàm xuất Menu các chức năng trong quản lý sách
+void menuSach() {
+    printf("\n================***================\n"); printf("\n");
+    printf("QUAN LY DOC SACH"); printf("\n");
+    printf("a.Xem danh sach sach\n");
+    printf("b.Them sach\n");
+    printf("c.Chinh sua thong tin sach\n");
+    printf("d.Xoa sach\n");
+    printf("e.Tim kiem sach theo ISBN\n");
+    printf("f.Tim kiem sach theo ten sach\n");
+    printf("g.TRO LAI THU VIEN\n"); printf("\n");
+    printf("================***================\n"); printf("\n");
+    printf("\nChon mot chuc nang: ");
+}
 
+// Hàm xử lý khi gọi các chức năng
+void quanLySach() {
+    char chon;
+    DocMangTuTapTinSach(danhSachSach, soSach);
+    while (true) {
+        menuSach();
+        scanf(" %c", &chon);
+        switch (chon) {
+            case 'a':
+                if (soSach < 1) {
+                    printf("Danh sach trong!\n");
+                    continue;
+                }
+                printf("DANH SACH SACH:\n");
+                xemDanhSachSach();
+                break;
+            case 'b':
+                printf("THEM SACH MOI:\n");
+                themSach();
+                GhiTapTinSach(danhSachSach, soSach);
+                break;
+            case 'c':
+                printf("CHINH SUA THONG TIN SACH:\n");
+                chinhSuaSach();
+                GhiTapTinSach(danhSachSach, soSach);
+                break;
+            case 'd':
+                printf("XOA SACH:\n");
+                xoaSach();
+                GhiTapTinSach(danhSachSach, soSach);
+                break;
+            case 'e':
+                printf("TIM KIEM THEO ISBN:\n");
+                timKiemISBN();
+                break;
+            case 'f':
+                printf("TIM KIEM THEO TEN SACH:\n");
+                timKiemTen();
+                break;
+            case 'g': printf("|  TRO LAI MENU  |\n");
+                return;
+            default:
+                printf("Lua chon khong hop le\n");
+                break;
+        }
+    }
+}
+
+void GhiTapTinSach(sach danhSachSach[], int soSach) {
+    FILE* file;
+    fopen_s(&file, "D:\\KHTN_NHAPMONLAPTRINH\\DanhSachSach.txt", "wt");
+    fprintf(file, "%d\n", soSach);
+    for (int i = 0; i < soSach; i++) {
+        fprintf(file, "%s\n", danhSachSach[i].ISBN);
+        fprintf(file, "%s\n", danhSachSach[i].tenSach);
+        fprintf(file, "%s\n", danhSachSach[i].tacGia);
+        fprintf(file, "%s\n", danhSachSach[i].nhaXuatBan);
+        fprintf(file, "%s\n", danhSachSach[i].namXuatBan);
+        fprintf(file, "%s\n", danhSachSach[i].theLoai);
+        fprintf(file, "%s\n", danhSachSach[i].giaSach);
+        fprintf(file, "%s\n", danhSachSach[i].soLuong);
+    }
+    fclose(file);
+}
+
+void DocMangTuTapTinSach(sach danhSachSach[], int& n) {
+    FILE* file;
+    fopen_s(&file, "D:\\KHTN_NHAPMONLAPTRINH\\DanhSachSach.txt", "rt");
+    if (file != NULL) {
+        fscanf_s(file, "%d", &n);
+        fgetc(file);
+        for (int i = 0; i < n; i++) {
+            fgets(danhSachSach[i].ISBN,MAX_TEXTS_LENGTH,file);
+            fgets(danhSachSach[i].tenSach,MAX_TEXT_LENGTH,file);
+            fgets(danhSachSach[i].tacGia,MAX_TEXT_LENGTH,file);
+            fgets(danhSachSach[i].nhaXuatBan,MAX_TEXTS_LENGTH,file);
+            fgets(danhSachSach[i].namXuatBan,MAX_TEXTS_LENGTH,file);
+            fgets(danhSachSach[i].theLoai,MAX_TEXT_LENGTH,file);
+            fgets(danhSachSach[i].giaSach,MAX_TEXT_LENGTH,file);
+            fgets(danhSachSach[i].soLuong,MAX_TEXTS_LENGTH,file);
+
+            // Xoá ký tự '\n' cuối mỗi dòng nếu có
+            danhSachSach[i].ISBN[strcspn(danhSachSach[i].ISBN, "\n")] = '\0';
+            danhSachSach[i].tenSach[strcspn(danhSachSach[i].tenSach, "\n")] = '\0';
+            danhSachSach[i].tacGia[strcspn(danhSachSach[i].tacGia, "\n")] = '\0';
+            danhSachSach[i].nhaXuatBan[strcspn(danhSachSach[i].nhaXuatBan, "\n")] = '\0';
+            danhSachSach[i].namXuatBan[strcspn(danhSachSach[i].namXuatBan, "\n")] = '\0';
+            danhSachSach[i].theLoai[strcspn(danhSachSach[i].theLoai, "\n")] = '\0';
+            danhSachSach[i].giaSach[strcspn(danhSachSach[i].giaSach, "\n")] = '\0';
+            danhSachSach[i].soLuong[strcspn(danhSachSach[i].soLuong, "\n")] = '\0';
+        }
+        fclose(file);
+    }
+    else {
+        printf("Khong mo duoc tap tin");
+    }
+}
 
 // Hàm hiển thị danh sách sách
 void xemDanhSachSach() {
@@ -223,65 +328,6 @@ void xoaSach() {
         }
     }
     if (!found) printf("Khong tim thay sach!\n");
-}
-
-// Hàm xuất Menu các chức năng trong quản lý sách
-void menuSach() {
-    printf("\n================***================\n"); printf("\n");
-    printf("QUAN LY DOC SACH"); printf("\n");
-    printf("a.Xem danh sach sach\n");
-    printf("b.Them sach\n");
-    printf("c.Chinh sua thong tin sach\n");
-    printf("d.Xoa sach\n");
-    printf("e.Tim kiem sach theo ISBN\n");
-    printf("f.Tim kiem sach theo ten sach\n");
-    printf("g.TRO LAI THU VIEN\n"); printf("\n");
-    printf("================***================\n"); printf("\n");
-    printf("\nChon mot chuc nang: ");
-}
-
-// Hàm xử lý khi gọi các chức năng
-void quanLySach() {
-    char chon;
-    while (true) {
-        menuSach();
-        scanf(" %c", &chon);
-        switch (chon) {
-            case 'a':
-                if (soSach < 1) {
-                    printf("Danh sach trong!\n");
-                    continue;
-                }
-                printf("DANH SACH SACH:\n");
-            xemDanhSachSach();
-            break;
-            case 'b':
-                printf("THEM SACH MOI:\n");
-            themSach();
-            break;
-            case 'c':
-                printf("CHINH SUA THONG TIN SACH:\n");
-            chinhSuaSach();
-            break;
-            case 'd':
-                printf("XOA SACH:\n");
-            xoaSach();
-            break;
-            case 'e':
-                printf("TIM KIEM THEO ISBN:\n");
-            timKiemISBN();
-            break;
-            case 'f':
-                printf("TIM KIEM THEO TEN SACH:\n");
-            timKiemTen();
-            break;
-            case 'g': printf("|  TRO LAI MENU  |\n");
-            return;
-            default:
-                printf("Lua chon khong hop le\n");
-            break;
-        }
-    }
 }
 
 

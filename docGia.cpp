@@ -3,15 +3,123 @@
 #include <string.h>
 #include "docGia.h"
 
-// Tạo danh sách độc giả demo
-docGia danhSachDocGia[MAX_USERS] = {
-    {"DG001", "Nguyen Thi Lan", "123456789", "21/03/1998", "Nu", "Lannt@gmail.com", "123 Le Lai, TP.HCM", "01/01/2022", "01/01/2026"},
-    {"DG002", "Tran Minh Tu", "987654321", "15/05/2000", "Nam", "tmtu@gmail.com", "456 Nguyen Thi Minh Khai, TP.HCM", "15/02/2021", "15/02/2025"},
-    {"DG003", "Nguyen Van C", "456789125", "13/07/2001", "Nam", "nguyenvanc@gmail.com", "11 Hong Bang, TPHCM", "12/09/2023", "12/09/2027"}
-};
+docGia danhSachDocGia[MAX_USERS];
 
-//Số độc giả ban đầu là 3
-int soDocGia = 3;
+//Số độc giả ban đầu là 0
+int soDocGia = 0;
+
+// Hàm xuất Menu các chức năng trong quản lý độc giả
+void menuDocGia() {
+    printf("\n================***================"); printf("\n");
+    printf("BAN DANG THUC HIEN QUAN LY DOC GIA"); printf("\n");
+    printf("\na.Xem danh sach doc gia trong thu vien");
+    printf("\nb.Them doc gia");
+    printf("\nc.Chinh sua thong tin doc gia");
+    printf("\nd.Xoa thong tin doc gia");
+    printf("\ne.Tim kiem doc gia theo CMND");
+    printf("\nf.Tim kiem doc gia theo ho ten");
+    printf("\ng.TRO LAI THU VIEN"); printf("\n");
+    printf("\n================***================"); printf("\n");
+    printf("\nChon mot chuc nang: ");
+}
+
+// Hàm xử lý khi gọi các chức năng
+void quanLyDocGia() {
+    char chon;
+    DocMangTuTapTinDocGia(danhSachDocGia, soDocGia);
+    while (true) {
+        menuDocGia();
+        scanf
+        (" %c", &chon);
+        switch (chon)
+        {
+            case 'a':
+                if (soDocGia < 1) {
+                printf("Danh sach trong!\n");
+                continue;
+            }
+            printf("|  Ban dang: Xem danh sach do gia trong thu vien  |");
+            xuatDanhSach();
+            break;
+            case 'b': printf("|  Ban dang: Them doc gia  |");
+            themDocGia();
+                GhiTapTinDocGia(danhSachDocGia, soDocGia);
+            break;
+            case 'c': printf("|  Ban dang: Chinh sua thong tin doc gia  |");
+            suaThongTinDocGia();
+                GhiTapTinDocGia(danhSachDocGia, soDocGia);
+            break;
+            case 'd': printf("|  Ban dang: Xoa thong tin doc gia  |");
+            xoaThongTinDocGia();
+                GhiTapTinDocGia(danhSachDocGia, soDocGia);
+            break;
+            case 'e': printf("|  Ban dang: Tim kiem doc gia theo CMND  |");
+            timKiemDocGiaTheoCMND();
+            break;
+            case 'f': printf("|  Ban dang: Tim kiem doc gia theo ho ten  |");
+            timKiemDocGiaTheoHoTen();
+            break;
+            case 'g': printf("|  TRO LAI MENU  |\n");
+            return;
+            default:
+                printf("Lua chon khong hop le\n");
+            break;
+        }
+    }
+}
+
+void GhiTapTinDocGia(docGia danhSachDocGia[], int soDocGia) {
+    FILE* file;
+    fopen_s(&file, "D:\\KHTN_NHAPMONLAPTRINH\\DanhSachDocGia.txt", "wt");
+    fprintf(file, "%d\n", soDocGia);
+    for (int i = 0; i < soDocGia; i++) {
+        fprintf(file, "%s\n", danhSachDocGia[i].maDocGia);
+        fprintf(file, "%s\n", danhSachDocGia[i].hoTen);
+        fprintf(file, "%s\n", danhSachDocGia[i].cmnd);
+        fprintf(file, "%s\n", danhSachDocGia[i].ngaySinh);
+        fprintf(file, "%s\n", danhSachDocGia[i].gioiTinh);
+        fprintf(file, "%s\n", danhSachDocGia[i].email);
+        fprintf(file, "%s\n", danhSachDocGia[i].diaChi);
+        fprintf(file, "%s\n", danhSachDocGia[i].ngayLapThe);
+        fprintf(file, "%s\n", danhSachDocGia[i].ngayHetHan);
+    }
+    fclose(file);
+}
+
+void DocMangTuTapTinDocGia(docGia danhSachDocGia[], int& n) {
+    FILE* file;
+    fopen_s(&file, "D:\\KHTN_NHAPMONLAPTRINH\\DanhSachDocGia.txt", "rt");
+    if (file != NULL) {
+        fscanf_s(file, "%d", &n);
+        fgetc(file);
+        for (int i = 0; i < n; i++) {
+            fgets(danhSachDocGia[i].maDocGia,MAX_DOC_GIA_ID_LENGTH,file);
+            fgets(danhSachDocGia[i].hoTen,MAX_TEXT_LENGTH,file);
+            fgets(danhSachDocGia[i].cmnd,MAX_TEXT_LENGTH,file);
+            fgets(danhSachDocGia[i].ngaySinh,MAX_DATE_LENGTH,file);
+            fgets(danhSachDocGia[i].gioiTinh,MAX_GENDER_LENGTH,file);
+            fgets(danhSachDocGia[i].email,MAX_TEXT_LENGTH,file);
+            fgets(danhSachDocGia[i].diaChi,MAX_TEXT_LENGTH,file);
+            fgets(danhSachDocGia[i].ngayLapThe,MAX_DATE_LENGTH,file);
+            fgets(danhSachDocGia[i].ngayHetHan,MAX_DATE_LENGTH,file);
+
+            // Xoá ký tự '\n' cuối mỗi dòng nếu có
+            danhSachDocGia[i].maDocGia[strcspn(danhSachDocGia[i].maDocGia, "\n")] = '\0';
+            danhSachDocGia[i].hoTen[strcspn(danhSachDocGia[i].hoTen, "\n")] = '\0';
+            danhSachDocGia[i].cmnd[strcspn(danhSachDocGia[i].cmnd, "\n")] = '\0';
+            danhSachDocGia[i].ngaySinh[strcspn(danhSachDocGia[i].ngaySinh, "\n")] = '\0';
+            danhSachDocGia[i].gioiTinh[strcspn(danhSachDocGia[i].gioiTinh, "\n")] = '\0';
+            danhSachDocGia[i].email[strcspn(danhSachDocGia[i].email, "\n")] = '\0';
+            danhSachDocGia[i].diaChi[strcspn(danhSachDocGia[i].diaChi, "\n")] = '\0';
+            danhSachDocGia[i].ngayLapThe[strcspn(danhSachDocGia[i].ngayLapThe, "\n")] = '\0';
+            danhSachDocGia[i].ngayHetHan[strcspn(danhSachDocGia[i].ngayHetHan, "\n")] = '\0';
+        }
+        fclose(file);
+    }
+    else {
+        printf("Khong mo duoc tap tin");
+    }
+}
 
 // Hàm thêm độc giả mới
 // Nhập vào từng thuộc tính, mỗi thuộc tính là 1 mảng 1 chiều,
@@ -64,36 +172,6 @@ void themDocGia() {
     nhapNgayLapThe(soDocGia);
 
     soDocGia++;
-}
-
-
-
-// char maDocGia[MAX_DOC_GIA_ID_LENGTH];
-// char hoTen[MAX_TEXT_LENGTH];
-// char cmnd[MAX_TEXT_LENGTH];
-// char ngaySinh[MAX_DATE_LENGTH];
-// char gioiTinh[MAX_GENDER_LENGTH];
-// char email[MAX_TEXT_LENGTH];
-// char diaChi[MAX_TEXT_LENGTH];
-// char ngayLapThe[MAX_DATE_LENGTH];
-// char ngayHetHan[MAX_DATE_LENGTH];
-
-void GhiTapTin(docGia danhSachDocGia[], int soDocGia) {
-    FILE* file;
-    fopen_s(&file, "D:\\KHTN_NHAPMONLAPTRINH\\DanhSachDocGia.txt", "wt");
-    fprintf(file, "Tong so luong doc gia: %d\n", soDocGia);
-    fprintf(file, "\n%90s\n", "==== DANH SACH DOC GIA ====");
-    fprintf(file, "\n%-6s | %-20s | %-10s | %-10s | %-5s | %-20s | %-40s | %-12s | %-12s |\n",
-        "MaDG", "Ho Ten", "CMND", "Ngay sinh", "GT", "Email", "Dia chi", "Lap the", "Het han");
-    fprintf(file,"-----------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-
-    for (int i = 0; i < soDocGia; i++)
-    {
-        fprintf(file, "%-6s | %-20s | %-10s | %-10s | %-5s | %-20s | %-40s | %-12s | %-12s |\n",
-            danhSachDocGia[i].maDocGia, danhSachDocGia[i].hoTen, danhSachDocGia[i].cmnd, danhSachDocGia[i].ngaySinh,
-            danhSachDocGia[i].gioiTinh, danhSachDocGia[i].email, danhSachDocGia[i].diaChi, danhSachDocGia[i].ngayLapThe, danhSachDocGia[i].ngayHetHan);
-    }
-    fclose(file);
 }
 
 // Hàm xuất danh sách độc giả
@@ -255,64 +333,5 @@ void timKiemDocGiaTheoHoTen() {
     }
     if (!found) {
         printf("Khong tim thay doc gia voi ten nay.\n");
-    }
-}
-
-// Hàm xuất Menu các chức năng trong quản lý độc giả
-void menuDocGia() {
-    printf("\n================***================"); printf("\n");
-    printf("BAN DANG THUC HIEN QUAN LY DOC GIA"); printf("\n");
-    printf("\na.Xem danh sach doc gia trong thu vien");
-    printf("\nb.Them doc gia");
-    printf("\nc.Chinh sua thong tin doc gia");
-    printf("\nd.Xoa thong tin doc gia");
-    printf("\ne.Tim kiem doc gia theo CMND");
-    printf("\nf.Tim kiem doc gia theo ho ten");
-    printf("\ng.TRO LAI THU VIEN"); printf("\n");
-    printf("\n================***================"); printf("\n");
-    printf("\nChon mot chuc nang: ");
-}
-
-// Hàm xử lý khi gọi các chức năng
-void quanLyDocGia() {
-    char chon;
-    while (true) {
-        menuDocGia();
-        scanf
-        (" %c", &chon);
-        switch (chon)
-        {
-            case 'a':
-                if (soDocGia < 1) {
-                printf("Danh sach trong!\n");
-                continue;
-            }
-            printf("|  Ban dang: Xem danh sach do gia trong thu vien  |");
-            xuatDanhSach();
-            break;
-            case 'b': printf("|  Ban dang: Them doc gia  |");
-            themDocGia();
-                GhiTapTin(danhSachDocGia, soDocGia);
-            break;
-            case 'c': printf("|  Ban dang: Chinh sua thong tin doc gia  |");
-            suaThongTinDocGia();
-                GhiTapTin(danhSachDocGia, soDocGia);
-            break;
-            case 'd': printf("|  Ban dang: Xoa thong tin doc gia  |");
-            xoaThongTinDocGia();
-                GhiTapTin(danhSachDocGia, soDocGia);
-            break;
-            case 'e': printf("|  Ban dang: Tim kiem doc gia theo CMND  |");
-            timKiemDocGiaTheoCMND();
-            break;
-            case 'f': printf("|  Ban dang: Tim kiem doc gia theo ho ten  |");
-            timKiemDocGiaTheoHoTen();
-            break;
-            case 'g': printf("|  TRO LAI MENU  |\n");
-            return;
-            default:
-                printf("Lua chon khong hop le\n");
-            break;
-        }
     }
 }
