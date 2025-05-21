@@ -10,6 +10,8 @@
 extern int soPhieuTra;
 extern struct phieuTra danhSachPTra[MAX_PHIEUTRA];
 
+void GhiTapTinPhieuTra(phieuTra danhSachPTra[], int soPhieuTra);
+void DocMangTuTapTinPhieuTra(phieuTra danhSachPTra[], int& n);
 void nhapTraSach();
 void xuatTraSach();
 
