@@ -29,8 +29,7 @@ void quanLyDocGia() {
     DocMangTuTapTinDocGia(danhSachDocGia, soDocGia);
     while (true) {
         menuDocGia();
-        scanf
-        (" %c", &chon);
+        scanf(" %c", &chon);
         switch (chon)
         {
             case 'a':
@@ -188,6 +187,18 @@ void xuatDanhSach() {
     }
 }
 
+//Kiểm tra chuỗi dữ liệu nhập vào nếu không rỗng thì mới cập nhật
+//Ngược lại thì giữ chuỗi cũ
+void capNhatChuoiNeuNhap(char* truongDuLieu, int maxLen) {
+    char temp[256];
+    fgets(temp, sizeof(temp), stdin);
+    temp[strcspn(temp, "\n")] = 0;
+    if (strlen(temp) > 0) {
+        strncpy(truongDuLieu, temp, maxLen);
+        truongDuLieu[maxLen - 1] = '\0'; // Đảm bảo kết thúc chuỗi
+    }
+}
+
 // Hàm sửa thông tin độc giả
 // Nhập vào mã độc giả muốn sửa, nếu có thì chỉnh sửa thông tin, nếu không thì thông báo không có mã đó
 // Không sửa lại mã độc giả, các thông tin phải được nhập đầy đủ
@@ -196,38 +207,32 @@ void suaThongTinDocGia() {
     char id[MAX_DOC_GIA_ID_LENGTH];
     int found = 0;
 
-    while (getchar() != '\n'); // <== thêm dòng này để ăn sạch '\n' trước khi nhập mới
+    while (getchar() != '\n'); // Ăn sạch '\n' trước khi nhập mới
     printf("\nNhap ma doc gia can sua: ");
     fgets(id, MAX_DOC_GIA_ID_LENGTH, stdin);
     id[strcspn(id, "\n")] = 0;
 
     for (int i = 0; i < soDocGia; i++) {
         if (strcmp(danhSachDocGia[i].maDocGia, id) == 0) {
-            printf("\nChinh sua thong tin doc gia %d:\n", i + 1);
+            printf("\nChinh sua thong tin doc gia %d (de trong neu muon giu nguyen):\n", i + 1);
 
-            printf("Ho ten: ");
-            fgets(danhSachDocGia[i].hoTen, MAX_TEXT_LENGTH, stdin);
-            danhSachDocGia[i].hoTen[strcspn(danhSachDocGia[i].hoTen, "\n")] = 0;
+            printf("Ho ten (Hien tai: %s): ", danhSachDocGia[i].hoTen);
+            capNhatChuoiNeuNhap(danhSachDocGia[i].hoTen, MAX_TEXT_LENGTH);
 
-            printf("CMND: ");
-            fgets(danhSachDocGia[i].cmnd, MAX_TEXT_LENGTH, stdin);
-            danhSachDocGia[i].cmnd[strcspn(danhSachDocGia[i].cmnd, "\n")] = 0;
+            printf("CMND (Hien tai: %s): ", danhSachDocGia[i].cmnd);
+            capNhatChuoiNeuNhap(danhSachDocGia[i].cmnd, MAX_TEXT_LENGTH);
 
-            printf("Ngay sinh (dd/mm/yyyy): ");
-            fgets(danhSachDocGia[i].ngaySinh, MAX_DATE_LENGTH, stdin);
-            danhSachDocGia[i].ngaySinh[strcspn(danhSachDocGia[i].ngaySinh, "\n")] = 0;
+            printf("Ngay sinh (dd/mm/yyyy) (Hien tai: %s): ", danhSachDocGia[i].ngaySinh);
+            capNhatChuoiNeuNhap(danhSachDocGia[i].ngaySinh, MAX_DATE_LENGTH);
 
-            printf("Gioi tinh (Nam/Nu): ");
-            fgets(danhSachDocGia[i].gioiTinh, MAX_GENDER_LENGTH, stdin);
-            danhSachDocGia[i].gioiTinh[strcspn(danhSachDocGia[i].gioiTinh, "\n")] = 0;
+            printf("Gioi tinh (Nam/Nu) (Hien tai: %s): ", danhSachDocGia[i].gioiTinh);
+            capNhatChuoiNeuNhap(danhSachDocGia[i].gioiTinh, MAX_GENDER_LENGTH);
 
-            printf("Email: ");
-            fgets(danhSachDocGia[i].email, MAX_TEXT_LENGTH, stdin);
-            danhSachDocGia[i].email[strcspn(danhSachDocGia[i].email, "\n")] = 0;
+            printf("Email (Hien tai: %s): ", danhSachDocGia[i].email);
+            capNhatChuoiNeuNhap(danhSachDocGia[i].email, MAX_TEXT_LENGTH);
 
-            printf("Dia chi: ");
-            fgets(danhSachDocGia[i].diaChi, MAX_TEXT_LENGTH, stdin);
-            danhSachDocGia[i].diaChi[strcspn(danhSachDocGia[i].diaChi, "\n")] = 0;
+            printf("Dia chi (Hien tai: %s): ", danhSachDocGia[i].diaChi);
+            capNhatChuoiNeuNhap(danhSachDocGia[i].diaChi, MAX_TEXT_LENGTH);
 
             nhapNgayLapThe(i);
             printf("Thong tin doc gia da duoc cap nhat.\n");
@@ -235,6 +240,7 @@ void suaThongTinDocGia() {
             break;
         }
     }
+
     if (!found) {
         printf("Khong tim thay ma doc gia.\n");
     }

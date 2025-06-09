@@ -14,6 +14,9 @@ extern struct docGia danhSachDocGia[MAX_USERS];
 //Khai báo tên hàm
 void menuDocGia();
 void DocMangTuTapTinDocGia(docGia danhSachDocGia[], int& n);
+
+void capNhatChuoiNeuNhap(char* truongDuLieu, int maxLen);
+
 void GhiTapTinDocGia(docGia danhSachDocGia[], int slDocGia);
 void themDocGia();
 void xuatDanhSach();

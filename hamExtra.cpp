@@ -3,6 +3,7 @@
 #include "hamExtra.h"
 #include "docGia.h"
 
+sach danhSachSach[MAX_SACH];
 // Tính xem ngày thứ dd/mm/yyyy là ngày thứ bao nhiêu trong năm.
 // Đầu vào là ngày, tháng, năm, đầu ra là ngày thứ mấy trong năm
 int tinhSoNgayTrongNam(int d, int m, int y) {
@@ -139,20 +140,31 @@ int tonTaiMaSach(char maSachNhap[]) {
 // Đầu vào là chỉ số của thuộc tính ngày lập thẻ trong danh sách độc giả
 // Đầu ra là ngày hết hạn (+ 48 tháng) tại chỉ số cột tương ứng
 void nhapNgayLapThe(int index) {
+    char input[50];
     int d, m, y;
 
-    printf("Nhap ngay lap the (dd/mm/yyyy): ");
-    scanf_s("%d/%d/%d", &d, &m, &y);
+    printf("Ngay lap the (dd/mm/yyyy) (Hien tai: %s): ", danhSachDocGia[index].ngayLapThe);
+    fgets(input, sizeof(input), stdin);
+    input[strcspn(input, "\n")] = 0; // Xoá '\n'
 
-    while (getchar() != '\n'); // Xóa bỏ ký tự thừa
+    // Nếu người dùng không nhập gì thì giữ nguyên ngày cũ
+    if (strlen(input) == 0) {
+        return;
+    }
 
-    // Lưu lại ngày lập thẻ theo định dạng dd/mm/yyyy (không xài print vì print chỉ in ra, không lưu lại)
-    sprintf(danhSachDocGia[index].ngayLapThe, "%02d/%02d/%04d", d, m, y);
+    // Nếu có nhập, parse ngày
+    if (sscanf(input, "%d/%d/%d", &d, &m, &y) == 3) {
+        // Gán lại ngày lập thẻ
+        sprintf(danhSachDocGia[index].ngayLapThe, "%02d/%02d/%04d", d, m, y);
 
-    // Cộng thêm 48 tháng
-    m += 48;
-    y += (m - 1) / 12;
-    m = (m - 1) % 12 + 1;
+        // Cộng thêm 48 tháng => tính ngày hết hạn
+        m += 48;
+        y += (m - 1) / 12;
+        m = (m - 1) % 12 + 1;
 
-    sprintf(danhSachDocGia[index].ngayHetHan, "%02d/%02d/%04d", d, m, y);
+        sprintf(danhSachDocGia[index].ngayHetHan, "%02d/%02d/%04d", d, m, y);
+    } else {
+        printf("Ngay khong hop le, giu nguyen ngay cu.\n");
+    }
 }
+

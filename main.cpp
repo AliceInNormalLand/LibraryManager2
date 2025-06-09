@@ -3,11 +3,20 @@
 // Hàm main, chương trình sẽ bắt đầu từ hàm này
 int main()
 {
+    char buffer[100];
     int chon;
     while (true)
     {
         menu();
-        scanf("%d",&chon);
+
+        fgets(buffer, sizeof(buffer), stdin);
+
+        // Kiểm tra nếu nhập đúng số nguyên
+        if (sscanf(buffer, "%d", &chon) != 1) {
+            printf("Vui long nhap mot so nguyen hop le!\n");
+            continue; // Quay lại menu
+        }
+
         switch (chon)
         {
             case 1: printf("|  QUAN LY DOC GIA  |");
